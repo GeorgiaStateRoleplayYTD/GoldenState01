@@ -35,10 +35,10 @@
 </head>
 <body class="text-white min-h-screen">
 
-    <!-- LOADING SCREEN (12 seconds) -->
+    <!-- LOADING SCREEN -->
     <div id="loading-screen" class="fixed inset-0 bg-black flex flex-col items-center justify-center z-50">
         <div class="text-center">
-            <img src="https://i.imgur.com/vB2Gt8p.png" alt="GSRP Logo" class="h-32 mx-auto mb-8">
+            <img src="https://i.imgur.com/vB2Gt8p.png" class="h-32 mx-auto mb-8">
             <h1 class="text-5xl font-black tracking-widest neon-green mb-2">GOLDEN STATE ROLEPLAY</h1>
             <p class="text-[#a3e635] text-xl mb-8">v2.0.1 UPDATE</p>
             <div class="flex items-center justify-center gap-3 text-[#a3e635] font-mono mb-8">
@@ -51,131 +51,59 @@
         </div>
     </div>
 
-    <!-- MAIN CONTENT -->
     <div id="main-content" class="hidden">
 
         <!-- Navbar -->
         <nav class="bg-black/90 border-b border-[#a3e635]/30 backdrop-blur-md sticky top-0 z-50">
             <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
                 <div class="flex items-center gap-4">
-                    <img src="https://i.imgur.com/vB2Gt8p.png" alt="Logo" class="h-12">
+                    <img src="https://i.imgur.com/vB2Gt8p.png" class="h-12">
                     <div>
-                        <h1 class="text-2xl font-black tracking-tighter">GOLDEN STATE</h1>
-                        <p class="text-[#a3e635] text-sm -mt-1">ROLEPLAY <span class="text-xs">v2.0.1</span></p>
+                        <h1 class="text-2xl font-black">GOLDEN STATE</h1>
+                        <p class="text-[#a3e635] text-sm">ROLEPLAY v2.0.1</p>
                     </div>
                 </div>
-                <div class="hidden md:flex gap-8 text-sm font-medium">
-                    <a href="#fivem" class="hover:text-[#a3e635]">FiveM</a>
-                    <a href="#roblox" class="hover:text-[#a3e635]">Roblox</a>
-                    <a href="#community" class="hover:text-[#a3e635]">Community</a>
-                </div>
                 <a href="https://discord.gg/m34XMdwCvX" target="_blank" 
-                   class="bg-[#a3e635] text-black px-6 py-3 rounded-xl font-bold hover:bg-[#bef575]">
+                   class="bg-[#a3e635] text-black px-6 py-3 rounded-xl font-bold">
                     JOIN DISCORD
                 </a>
             </div>
         </nav>
 
-        <!-- v2.0.1 Update Banner -->
-        <div class="bg-gradient-to-r from-[#a3e635] to-green-600 text-black py-4 text-center font-bold text-lg">
-            🚀 <span class="uppercase tracking-widest">v2.0.1 MAJOR UPDATE LIVE</span> 🚀
-        </div>
-
         <!-- Hero -->
         <section class="py-28 text-center">
-            <h1 class="text-6xl md:text-7xl font-black tracking-tighter neon-green mb-6">
-                GOLDEN STATE ROLEPLAY
-            </h1>
-            <p class="text-3xl text-white/90 mb-3">v2.0.1</p>
-            <p class="text-xl text-gray-300 max-w-3xl mx-auto">
-                Bigger. Better. More Immersive.
-            </p>
+            <h1 class="text-6xl font-black neon-green mb-6">GOLDEN STATE ROLEPLAY</h1>
+            <p class="text-xl text-gray-300">Bigger. Better. More Immersive.</p>
         </section>
 
-        <!-- FiveM Servers -->
-        <section id="fivem" class="max-w-7xl mx-auto px-6 py-20 bg-black/60">
-            <h2 class="text-5xl font-black text-center neon-green mb-16">FIVEM SERVERS • v2.0.1</h2>
-            <div class="grid md:grid-cols-2 gap-10">
+        <!-- 🔥 NEW LIVE EVENT SECTION -->
+        <section class="max-w-7xl mx-auto px-6 py-20">
+            <h2 class="text-5xl font-black text-center neon-green mb-16">LIVE EVENTS</h2>
+
+            <div class="grid md:grid-cols-2 gap-10 text-center">
+
                 <div class="bg-zinc-900 border border-[#a3e635]/30 rounded-3xl p-10 crt">
-                    <h3 class="text-3xl font-bold mb-4">Economy Roleplay</h3>
-                    <p class="text-gray-400 mb-6">Enhanced economy, new businesses, improved housing, and major performance upgrades in v2.0.1.</p>
-                    <button onclick="alert('FiveM Economy Server IP copied!')" 
-                            class="w-full bg-[#a3e635] text-black py-5 rounded-2xl font-bold text-lg">CONNECT TO ECONOMY SERVER</button>
+                    <h3 class="text-3xl font-bold mb-4">Standalone Event</h3>
+                    <p class="text-gray-400 mb-6">08/05/2026 • 16:45 CST</p>
+                    <div id="standalone-timer" class="text-4xl font-mono neon-green">Loading...</div>
                 </div>
 
                 <div class="bg-zinc-900 border border-[#a3e635]/30 rounded-3xl p-10 crt">
-                    <h3 class="text-3xl font-bold mb-4">Standalone Roleplay</h3>
-                    <p class="text-gray-400 mb-6">New scripts, better optimization, and refined roleplay rules for v2.0.1.</p>
-                    <button onclick="alert('FiveM Standalone Server IP copied!')" 
-                            class="w-full bg-[#a3e635] text-black py-5 rounded-2xl font-bold text-lg">CONNECT TO STANDALONE SERVER</button>
+                    <h3 class="text-3xl font-bold mb-4">QBcore Event</h3>
+                    <p class="text-gray-400 mb-6">09/05/2026 • 16:45 CST</p>
+                    <div id="qbcore-timer" class="text-4xl font-mono neon-green">Loading...</div>
                 </div>
+
             </div>
         </section>
 
-        <!-- Roblox Section -->
-        <section id="roblox" class="max-w-7xl mx-auto px-6 py-20">
-            <h2 class="text-5xl font-black text-center neon-green mb-16">ROBLOX SERVERS • v2.0.1</h2>
-            <div class="grid md:grid-cols-2 gap-10">
-                <div class="bg-zinc-900 border border-[#a3e635]/30 rounded-3xl p-10 crt">
-                    <h3 class="text-3xl font-bold mb-4">City Life Roleplay</h3>
-                    <p class="text-gray-400">Updated with new vehicles, jobs, and improved roleplay mechanics in v2.0.1.</p>
-                    <button onclick="alert('Join our Roblox City Life!')" 
-                            class="mt-10 w-full bg-[#a3e635] text-black py-5 rounded-2xl font-bold">PLAY ON ROBLOX</button>
-                </div>
-
-                <div class="bg-zinc-900 border border-[#a3e635]/30 rounded-3xl p-10 crt">
-                    <h3 class="text-3xl font-bold mb-4">Police & Emergency RP</h3>
-                    <p class="text-gray-400">Major overhaul with new dispatch system and training academy in v2.0.1.</p>
-                    <button onclick="alert('Join our Roblox Police RP!')" 
-                            class="mt-10 w-full bg-[#a3e635] text-black py-5 rounded-2xl font-bold">PLAY ON ROBLOX</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- Community / Staff -->
-        <section id="community" class="max-w-7xl mx-auto px-6 py-20 bg-black/60">
-            <h2 class="text-5xl font-black text-center neon-green mb-16">MEET THE TEAM</h2>
-            
-            <div class="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto">
-                <div class="bg-zinc-900 border border-[#a3e635]/30 rounded-3xl p-8 text-center">
-                    <div class="w-24 h-24 mx-auto bg-gradient-to-br from-[#a3e635] to-green-600 rounded-2xl flex items-center justify-center text-4xl font-bold mb-6">TA</div>
-                    <h3 class="text-2xl font-bold">Tristan Andrew</h3>
-                    <p class="text-[#a3e635] mb-4">Owner / Founder</p>
-                    <div class="grid grid-cols-2 gap-4 text-sm">
-                        <div>Police: <span class="text-emerald-400 font-bold">ACTIVE</span></div>
-                        <div>Fire/EMS: <span class="text-red-400">INACTIVE</span></div>
-                        <div class="col-span-2">Callsign: <span class="font-mono text-xl">100</span></div>
-                    </div>
-                </div>
-
-                <div class="bg-zinc-900 border border-[#a3e635]/30 rounded-3xl p-8 text-center">
-                    <div class="w-24 h-24 mx-auto bg-gradient-to-br from-[#a3e635] to-green-600 rounded-2xl flex items-center justify-center text-4xl font-bold mb-6">LH</div>
-                    <h3 class="text-2xl font-bold">Lee Howard</h3>
-                    <p class="text-[#a3e635] mb-4">Owner / Founder</p>
-                    <div class="grid grid-cols-2 gap-4 text-sm">
-                        <div>Police: <span class="text-emerald-400 font-bold">ACTIVE</span></div>
-                        <div>Fire/EMS: <span class="text-red-400">INACTIVE</span></div>
-                        <div class="col-span-2">Callsign: <span class="font-mono text-xl">100</span></div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center mt-12">
-                <a href="https://discord.gg/m34XMdwCvX" target="_blank" 
-                   class="inline-flex items-center gap-3 bg-[#a3e635] text-black px-10 py-5 rounded-2xl font-bold text-lg hover:bg-[#bef575]">
-                    <i class="fab fa-discord text-2xl"></i> JOIN OUR DISCORD
-                </a>
-            </div>
-        </section>
-
-        <footer class="bg-black py-12 text-center text-gray-500 border-t border-[#a3e635]/20">
-            <p class="text-lg">Golden State Roleplay • v2.0.1 • 2026</p>
-            <p class="mt-2">FiveM Economy • FiveM Standalone • Roblox Roleplay</p>
+        <footer class="bg-black py-12 text-center text-gray-500">
+            <p>Golden State Roleplay • v2.0.1 • 2026</p>
         </footer>
     </div>
 
     <script>
-        // 12 Second Loading
+        // Loading screen
         window.onload = () => {
             let progress = 0;
             const progressBar = document.getElementById('progress');
@@ -202,6 +130,38 @@
                 }
             }, interval);
         };
+
+        // Countdown timers
+        function startCountdown(id, target) {
+            const el = document.getElementById(id);
+
+            function update() {
+                const now = new Date().getTime();
+                const distance = target - now;
+
+                if (distance <= 0) {
+                    el.innerHTML = "🚨 EVENT LIVE 🚨";
+                    return;
+                }
+
+                const d = Math.floor(distance / (1000*60*60*24));
+                const h = Math.floor((distance / (1000*60*60)) % 24);
+                const m = Math.floor((distance / (1000*60)) % 60);
+                const s = Math.floor((distance / 1000) % 60);
+
+                el.innerHTML = `${d}D ${h}H ${m}M ${s}S`;
+            }
+
+            update();
+            setInterval(update, 1000);
+        }
+
+        const standaloneDate = new Date("2026-05-08T16:45:00-06:00").getTime();
+        const qbcoreDate = new Date("2026-05-09T16:45:00-06:00").getTime();
+
+        startCountdown("standalone-timer", standaloneDate);
+        startCountdown("qbcore-timer", qbcoreDate);
     </script>
+
 </body>
 </html>
