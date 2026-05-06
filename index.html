@@ -12,6 +12,14 @@
             background: url('https://i.imgur.com/JHY3Pri.png') center/cover no-repeat fixed;
             font-family: system-ui, -apple-system, sans-serif;
         }
+        /* Darker overlay */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: -1;
+        }
         .neon-green {
             color: #a3e635;
             text-shadow: 0 0 15px #a3e635;
@@ -39,7 +47,7 @@
 </head>
 <body class="text-white min-h-screen">
 
-    <!-- LOADING SCREEN -->
+    <!-- LOADING SCREEN (48 seconds) -->
     <div id="loading-screen" class="fixed inset-0 bg-black flex flex-col items-center justify-center z-50">
         <div class="text-center">
             <img src="https://i.imgur.com/vB2Gt8p.png" alt="GSRP Logo" class="h-28 mx-auto mb-8 logo">
@@ -54,7 +62,7 @@
             <div class="w-96 h-1.5 bg-zinc-800 rounded-full overflow-hidden mx-auto">
                 <div id="progress" class="h-full bg-[#a3e635] w-0 transition-all duration-300"></div>
             </div>
-            <p class="text-xs text-gray-500 mt-3 font-mono">SECURE CONNECTION ESTABLISHED</p>
+            <p class="text-xs text-gray-500 mt-3 font-mono">SECURE CONNECTION • PLEASE WAIT</p>
         </div>
     </div>
 
@@ -87,7 +95,6 @@
                 <p class="text-xl text-gray-300 mt-3">Golden State Roleplay • Law Enforcement System</p>
             </div>
 
-            <!-- Dashboard Cards -->
             <div class="grid md:grid-cols-12 gap-6">
                 <div class="md:col-span-8 bg-black/80 border border-[#a3e635]/30 rounded-2xl p-8 crt">
                     <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
@@ -139,29 +146,32 @@
     </div>
 
     <script>
-        // Loading Animation
+        // 48-second loading
         window.onload = () => {
             let progress = 0;
             const progressBar = document.getElementById('progress');
             const loadingScreen = document.getElementById('loading-screen');
             const mainContent = document.getElementById('main-content');
 
+            const totalTime = 48000; // 48 seconds
+            const interval = 100;    // update every 100ms
+            const steps = totalTime / interval;
+            let currentStep = 0;
+
             const loader = setInterval(() => {
-                progress += Math.random() * 18;
-                if (progress > 100) progress = 100;
+                currentStep++;
+                progress = (currentStep / steps) * 100;
                 progressBar.style.width = `${progress}%`;
 
-                if (progress >= 100) {
+                if (currentStep >= steps) {
                     clearInterval(loader);
+                    loadingScreen.style.opacity = '0';
                     setTimeout(() => {
-                        loadingScreen.style.opacity = '0';
-                        setTimeout(() => {
-                            loadingScreen.classList.add('hidden');
-                            mainContent.classList.remove('hidden');
-                        }, 800);
-                    }, 600);
+                        loadingScreen.classList.add('hidden');
+                        mainContent.classList.remove('hidden');
+                    }, 800);
                 }
-            }, 70);
+            }, interval);
         };
     </script>
 </body>
