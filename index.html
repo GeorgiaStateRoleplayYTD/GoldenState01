@@ -13,23 +13,23 @@ body {
     overflow-x: hidden;
 }
 
-/* DARK BASE */
+/* DARK LAYER */
 body::before {
     content: '';
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.88);
-    z-index: -5;
+    z-index: -10;
 }
 
-/* NEON TEXT */
+/* NEON */
 .neon-green {
     color: #a3e635;
     text-shadow: 0 0 20px #a3e635;
 }
 
 /* =========================
-   🌫 FOG (NEW EFFECT)
+   🌫 FOG (FIXED IMAGE)
 ========================= */
 .fog {
     position: fixed;
@@ -37,7 +37,7 @@ body::before {
     background: url('https://i.imgur.com/oZhKQoT.png');
     background-size: cover;
     opacity: 0.18;
-    z-index: -4;
+    z-index: -6;
     pointer-events: none;
     animation: fogMove 60s linear infinite;
     mix-blend-mode: screen;
@@ -49,38 +49,14 @@ body::before {
     100% { transform: translateX(0px) scale(1.1); }
 }
 
-/* =========================
-   🟢 FLOATING BLOBS
-========================= */
-.blob {
-    position: fixed;
-    width: 260px;
-    height: 260px;
-    background: radial-gradient(circle, rgba(163,230,53,0.6), transparent 70%);
-    filter: blur(45px);
-    border-radius: 50%;
-    z-index: -3;
-    animation: floatBlob 18s infinite ease-in-out;
-    pointer-events: none;
-}
-
-@keyframes floatBlob {
-    0%   { transform: translate(0,0) scale(1); opacity:0.25; }
-    50%  { transform: translate(80px,-100px) scale(1.2); opacity:0.45; }
-    100% { transform: translate(-60px,70px) scale(1); opacity:0.25; }
-}
-
-/* =========================
-   🌧 RAIN
-========================= */
+/* 🌧 RAIN */
 .rain {
     position: fixed;
     inset: 0;
     background: url('https://i.imgur.com/7QF3y7X.png');
     opacity: 0.15;
     animation: rainMove 0.4s linear infinite;
-    z-index: -2;
-    pointer-events: none;
+    z-index: -5;
 }
 
 @keyframes rainMove {
@@ -88,9 +64,7 @@ body::before {
     to { background-position: 0 100px; }
 }
 
-/* =========================
-   📡 RADAR
-========================= */
+/* 📡 RADAR */
 .radar {
     position: fixed;
     top: 50%;
@@ -101,7 +75,7 @@ body::before {
     border-radius: 50%;
     background: conic-gradient(rgba(163,230,53,0.2), transparent 60%);
     animation: radarSpin 6s linear infinite;
-    z-index: -3;
+    z-index: -6;
     pointer-events: none;
 }
 
@@ -110,15 +84,31 @@ body::before {
     to   { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* =========================
-   ⚡ LIGHTNING
-========================= */
+/* 🟢 BLOBS */
+.blob {
+    position: fixed;
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(circle, rgba(163,230,53,0.6), transparent 70%);
+    filter: blur(45px);
+    border-radius: 50%;
+    z-index: -4;
+    animation: floatBlob 18s infinite ease-in-out;
+}
+
+@keyframes floatBlob {
+    0% { transform: translate(0,0); opacity:0.2; }
+    50% { transform: translate(80px,-100px); opacity:0.5; }
+    100% { transform: translate(-60px,70px); opacity:0.2; }
+}
+
+/* ⚡ LIGHTNING */
 #lightning {
     position: fixed;
     inset: 0;
     background: white;
     opacity: 0;
-    z-index: 10;
+    z-index: 20;
     pointer-events: none;
 }
 </style>
@@ -126,21 +116,30 @@ body::before {
 
 <body class="text-white min-h-screen">
 
-<!-- EFFECT LAYERS -->
+<!-- EFFECTS -->
 <div class="fog"></div>
 <div class="rain"></div>
 <div class="radar"></div>
 <div id="lightning"></div>
 
 <!-- BLOBS -->
-<div class="blob" style="top:10%; left:15%; animation-duration:14s;"></div>
-<div class="blob" style="top:60%; left:70%; animation-duration:18s;"></div>
-<div class="blob" style="top:30%; left:80%; animation-duration:22s;"></div>
-<div class="blob" style="top:75%; left:20%; animation-duration:16s;"></div>
+<div class="blob" style="top:10%; left:15%;"></div>
+<div class="blob" style="top:60%; left:70%;"></div>
+<div class="blob" style="top:30%; left:80%;"></div>
+<div class="blob" style="top:75%; left:20%;"></div>
 
-<!-- LOADING -->
-<div id="loading-screen" class="fixed inset-0 bg-black flex items-center justify-center z-50">
-    <h1 class="text-5xl neon-green font-black">GOLDEN STATE ROLEPLAY</h1>
+<!-- LOADING SCREEN (RESTORED PROGRESS BAR) -->
+<div id="loading-screen" class="fixed inset-0 bg-black flex flex-col items-center justify-center z-50">
+
+    <h1 class="text-5xl neon-green font-black mb-4">GOLDEN STATE ROLEPLAY</h1>
+    <p class="text-[#a3e635] mb-8">v2.0.1 LOADING SYSTEM</p>
+
+    <!-- PROGRESS BAR -->
+    <div class="w-96 h-2 bg-zinc-800 rounded-full overflow-hidden">
+        <div id="progress" class="h-full bg-[#a3e635] w-0"></div>
+    </div>
+
+    <p class="text-gray-400 mt-4 text-sm">INITIALIZING LIVE EVENT SYSTEM...</p>
 </div>
 
 <!-- MAIN -->
@@ -179,16 +178,30 @@ body::before {
 
 <script>
 
-/* LOADING */
+/* =========================
+   LOADING PROGRESS BAR
+========================= */
 window.onload = () => {
-    setTimeout(() => {
-        document.getElementById("loading-screen").style.display = "none";
-        document.getElementById("main-content").classList.remove("hidden");
-        lightningLoop();
-    }, 2500);
+    let progress = 0;
+    const bar = document.getElementById("progress");
+
+    const load = setInterval(() => {
+        progress += 1;
+        bar.style.width = progress + "%";
+
+        if(progress >= 100){
+            clearInterval(load);
+            document.getElementById("loading-screen").style.display = "none";
+            document.getElementById("main-content").classList.remove("hidden");
+
+            lightningLoop();
+        }
+    }, 70);
 };
 
-/* LIGHTNING */
+/* =========================
+   LIGHTNING
+========================= */
 function lightningLoop(){
     const flash = document.getElementById("lightning");
 
@@ -200,14 +213,15 @@ function lightningLoop(){
     }, 1800);
 }
 
-/* COUNTDOWN */
+/* =========================
+   COUNTDOWN + CONNECT
+========================= */
 function startCountdown(timerId, btnId, target, link){
     const timer = document.getElementById(timerId);
     const btn = document.getElementById(btnId);
 
     function update(){
-        const now = Date.now();
-        const diff = target - now;
+        const diff = target - Date.now();
 
         if(diff <= 0){
             timer.innerHTML = "🚨 EVENT LIVE 🚨";
@@ -218,7 +232,6 @@ function startCountdown(timerId, btnId, target, link){
             btn.innerHTML = "CONNECT NOW";
 
             btn.onclick = () => {
-                document.body.style.filter = "hue-rotate(0deg) saturate(2)";
                 window.location.href = link;
             };
 
