@@ -6,7 +6,6 @@
 <title>Golden State Roleplay - v2.0.1</title>
 
 <script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
 
 <style>
 body {
@@ -14,13 +13,13 @@ body {
     overflow-x: hidden;
 }
 
-/* DARK OVERLAY */
+/* DARK BASE */
 body::before {
     content: '';
     position: fixed;
     inset: 0;
     background: rgba(0,0,0,0.88);
-    z-index: -3;
+    z-index: -5;
 }
 
 /* NEON TEXT */
@@ -29,18 +28,25 @@ body::before {
     text-shadow: 0 0 20px #a3e635;
 }
 
-/* CRT EFFECT */
-.crt::after {
-    content: '';
-    position: absolute;
+/* =========================
+   🌫 FOG (NEW EFFECT)
+========================= */
+.fog {
+    position: fixed;
     inset: 0;
-    background: repeating-linear-gradient(
-        transparent 0px,
-        transparent 2px,
-        rgba(163,230,53,0.08) 2px,
-        rgba(163,230,53,0.08) 4px
-    );
+    background: url('https://i.imgur.com/oZhKQoT.png');
+    background-size: cover;
+    opacity: 0.18;
+    z-index: -4;
     pointer-events: none;
+    animation: fogMove 60s linear infinite;
+    mix-blend-mode: screen;
+}
+
+@keyframes fogMove {
+    0%   { transform: translateX(0px) scale(1.1); }
+    50%  { transform: translateX(-80px) scale(1.2); }
+    100% { transform: translateX(0px) scale(1.1); }
 }
 
 /* =========================
@@ -53,7 +59,7 @@ body::before {
     background: radial-gradient(circle, rgba(163,230,53,0.6), transparent 70%);
     filter: blur(45px);
     border-radius: 50%;
-    z-index: -2;
+    z-index: -3;
     animation: floatBlob 18s infinite ease-in-out;
     pointer-events: none;
 }
@@ -65,19 +71,7 @@ body::before {
 }
 
 /* =========================
-   ⚡ LIGHTNING FLASH
-========================= */
-#lightning {
-    position: fixed;
-    inset: 0;
-    background: white;
-    opacity: 0;
-    z-index: 5;
-    pointer-events: none;
-}
-
-/* =========================
-   🌧 RAIN EFFECT
+   🌧 RAIN
 ========================= */
 .rain {
     position: fixed;
@@ -85,7 +79,7 @@ body::before {
     background: url('https://i.imgur.com/7QF3y7X.png');
     opacity: 0.15;
     animation: rainMove 0.4s linear infinite;
-    z-index: -1;
+    z-index: -2;
     pointer-events: none;
 }
 
@@ -95,7 +89,7 @@ body::before {
 }
 
 /* =========================
-   📡 RADAR SWEEP
+   📡 RADAR
 ========================= */
 .radar {
     position: fixed;
@@ -105,14 +99,10 @@ body::before {
     height: 600px;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    background: conic-gradient(
-        rgba(163,230,53,0.2),
-        transparent 60%
-    );
+    background: conic-gradient(rgba(163,230,53,0.2), transparent 60%);
     animation: radarSpin 6s linear infinite;
-    z-index: -2;
+    z-index: -3;
     pointer-events: none;
-    filter: blur(2px);
 }
 
 @keyframes radarSpin {
@@ -121,18 +111,23 @@ body::before {
 }
 
 /* =========================
-   🔴 RED ALERT MODE
+   ⚡ LIGHTNING
 ========================= */
-.red-alert body,
-.red-alert {
-    background-color: rgba(255,0,0,0.1);
+#lightning {
+    position: fixed;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    z-index: 10;
+    pointer-events: none;
 }
 </style>
 </head>
 
 <body class="text-white min-h-screen">
 
-<!-- EFFECTS -->
+<!-- EFFECT LAYERS -->
+<div class="fog"></div>
 <div class="rain"></div>
 <div class="radar"></div>
 <div id="lightning"></div>
@@ -143,113 +138,69 @@ body::before {
 <div class="blob" style="top:30%; left:80%; animation-duration:22s;"></div>
 <div class="blob" style="top:75%; left:20%; animation-duration:16s;"></div>
 
-<!-- SOUND TOGGLE -->
-<button onclick="toggleSound()"
-class="fixed bottom-6 right-6 bg-[#a3e635] text-black px-4 py-3 rounded-full font-bold z-50">
-🔊 SOUND
-</button>
-
-<audio id="ambient" loop>
-    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_9b7c3c0d5f.mp3">
-</audio>
-
 <!-- LOADING -->
-<div id="loading-screen" class="fixed inset-0 bg-black flex flex-col items-center justify-center z-50">
+<div id="loading-screen" class="fixed inset-0 bg-black flex items-center justify-center z-50">
     <h1 class="text-5xl neon-green font-black">GOLDEN STATE ROLEPLAY</h1>
-    <p class="text-[#a3e635] mt-2">v2.0.1</p>
 </div>
 
-<div id="main-content" class="hidden">
+<!-- MAIN -->
+<div id="main-content" class="hidden text-center py-20">
 
-<!-- HERO -->
-<section class="py-24 text-center">
-    <h1 class="text-6xl neon-green font-black">GOLDEN STATE ROLEPLAY</h1>
-</section>
+<h1 class="text-6xl neon-green font-black">LIVE EVENTS</h1>
 
-<!-- EVENTS -->
-<section class="max-w-6xl mx-auto px-6 py-20">
-
-<h2 class="text-4xl text-center neon-green mb-10">LIVE EVENTS</h2>
-
-<div class="grid md:grid-cols-2 gap-10">
+<div class="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto mt-16">
 
 <!-- Standalone -->
-<div class="bg-zinc-900 p-8 rounded-3xl crt relative">
-    <h3 class="text-2xl font-bold mb-3">Standalone</h3>
-
+<div class="bg-zinc-900 p-8 rounded-3xl">
+    <h2 class="text-2xl font-bold mb-3">Standalone</h2>
     <div id="standalone-timer" class="text-3xl neon-green mb-6">Loading...</div>
 
     <button id="standalone-btn"
-    class="w-full bg-gray-600 py-4 rounded-xl font-bold opacity-50 cursor-not-allowed"
-    disabled>
-    EVENT LOCKED
+        disabled
+        class="w-full bg-gray-600 py-4 rounded-xl font-bold opacity-50">
+        EVENT LOCKED
     </button>
 </div>
 
 <!-- QBcore -->
-<div class="bg-zinc-900 p-8 rounded-3xl crt relative">
-    <h3 class="text-2xl font-bold mb-3">QBcore</h3>
-
+<div class="bg-zinc-900 p-8 rounded-3xl">
+    <h2 class="text-2xl font-bold mb-3">QBcore</h2>
     <div id="qbcore-timer" class="text-3xl neon-green mb-6">Loading...</div>
 
     <button id="qbcore-btn"
-    class="w-full bg-gray-600 py-4 rounded-xl font-bold opacity-50 cursor-not-allowed"
-    disabled>
-    EVENT LOCKED
+        disabled
+        class="w-full bg-gray-600 py-4 rounded-xl font-bold opacity-50">
+        EVENT LOCKED
     </button>
 </div>
 
 </div>
-</section>
-
 </div>
 
 <script>
 
-/* =========================
-   LOADING
-========================= */
+/* LOADING */
 window.onload = () => {
     setTimeout(() => {
         document.getElementById("loading-screen").style.display = "none";
         document.getElementById("main-content").classList.remove("hidden");
-
         lightningLoop();
-    }, 3000);
+    }, 2500);
 };
 
-/* =========================
-   SOUND
-========================= */
-function toggleSound(){
-    const audio = document.getElementById("ambient");
-    if(audio.paused){
-        audio.play();
-    } else {
-        audio.pause();
-    }
-}
-
-/* =========================
-   LIGHTNING
-========================= */
+/* LIGHTNING */
 function lightningLoop(){
     const flash = document.getElementById("lightning");
 
     setInterval(() => {
-        if(Math.random() < 0.15){
+        if(Math.random() < 0.2){
             flash.style.opacity = 0.6;
-
-            setTimeout(() => {
-                flash.style.opacity = 0;
-            }, 120);
+            setTimeout(() => flash.style.opacity = 0, 120);
         }
-    }, 2000);
+    }, 1800);
 }
 
-/* =========================
-   COUNTDOWN SYSTEM
-========================= */
+/* COUNTDOWN */
 function startCountdown(timerId, btnId, target, link){
     const timer = document.getElementById(timerId);
     const btn = document.getElementById(btnId);
@@ -267,17 +218,17 @@ function startCountdown(timerId, btnId, target, link){
             btn.innerHTML = "CONNECT NOW";
 
             btn.onclick = () => {
-                document.body.classList.add("red-alert");
+                document.body.style.filter = "hue-rotate(0deg) saturate(2)";
                 window.location.href = link;
             };
 
             return;
         }
 
-        const d = Math.floor(diff / 86400000);
-        const h = Math.floor(diff / 3600000 % 24);
-        const m = Math.floor(diff / 60000 % 60);
-        const s = Math.floor(diff / 1000 % 60);
+        const d = Math.floor(diff/86400000);
+        const h = Math.floor(diff/3600000%24);
+        const m = Math.floor(diff/60000%60);
+        const s = Math.floor(diff/1000%60);
 
         timer.innerHTML = `${d}D ${h}H ${m}M ${s}S`;
     }
@@ -286,9 +237,7 @@ function startCountdown(timerId, btnId, target, link){
     setInterval(update, 1000);
 }
 
-/* =========================
-   EVENTS
-========================= */
+/* EVENTS */
 startCountdown(
     "standalone-timer",
     "standalone-btn",
