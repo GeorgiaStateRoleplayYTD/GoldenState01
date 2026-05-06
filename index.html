@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dept. of Justice | Georgia</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+        }
+        .scanlines {
+            background: repeating-linear-gradient(
+                transparent 0px,
+                transparent 2px,
+                rgba(0, 255, 0, 0.03) 2px,
+                rgba(0, 255, 0, 0.03) 4px
+            );
+        }
+        .wanted-card {
+            transition: all 0.3s ease;
+        }
+        .wanted-card:hover {
+            transform: rotate(1deg) scale(1.03);
+        }
+    </style>
+</head>
+<body class="bg-[#0f0709] text-white min-h-screen">
+
+    <!-- Header -->
+    <header class="border-b border-[#3b82f6]/30 bg-black/80 backdrop-blur-md sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <div class="w-10 h-10 bg-[#3b82f6] flex items-center justify-center text-black font-bold text-xl">DoJ</div>
+                <div>
+                    <h1 class="text-2xl font-black tracking-tighter">DEPARTMENT OF JUSTICE</h1>
+                    <p class="text-xs text-[#3b82f6] -mt-1">GEORGIA STATE</p>
+                </div>
+            </div>
+            <nav class="hidden md:flex gap-8 text-sm font-medium">
+                <a href="#" class="hover:text-[#3b82f6] transition-colors">HOME</a>
+                <a href="#" class="hover:text-[#3b82f6] transition-colors">ABOUT</a>
+                <a href="#" class="hover:text-[#3b82f6] transition-colors">NEWS</a>
+                <a href="#" class="text-[#3b82f6] font-bold">MOST WANTED</a>
+                <a href="#" class="hover:text-[#3b82f6] transition-colors">SUBMIT TIP</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-12">
+        <!-- Hero -->
+        <div class="text-center mb-16">
+            <div class="inline-flex items-center gap-2 px-6 py-2 bg-[#3b82f6]/10 border border-[#3b82f6]/30 rounded-full mb-6">
+                <i class="fas fa-exclamation-triangle text-[#3b82f6] animate-pulse"></i>
+                <span class="text-xs font-bold uppercase tracking-widest text-[#3b82f6]">ACTIVE WARRANTS</span>
+            </div>
+            <h1 class="text-7xl md:text-8xl font-black tracking-tighter mb-4">
+                MOST <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">WANTED</span>
+            </h1>
+            <p class="text-[#94a3b8] max-w-2xl mx-auto">
+                Warning: Individuals listed below are considered armed and dangerous.
+            </p>
+        </div>
+
+        <!-- Most Wanted Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <!-- Johnny Rich -->
+            <div class="wanted-card bg-[#1a1a1a] border-4 border-[#1e293b] p-6">
+                <div class="text-center border-b border-red-900 pb-4 mb-4">
+                    <h2 class="text-4xl font-black text-red-500 tracking-widest">WANTED</h2>
+                    <p class="text-xs text-gray-400">DEPT. OF JUSTICE • GEORGIA</p>
+                </div>
+                <div class="bg-black aspect-square flex items-center justify-center mb-6 overflow-hidden border border-gray-700">
+                    <span class="text-8xl opacity-30">👤</span>
+                </div>
+                <h3 class="text-2xl font-bold">Johnny Rich</h3>
+                <p class="text-sm text-gray-400">SSN: 659-69-4614</p>
+                <div class="mt-6 space-y-3 text-sm">
+                    <div class="flex justify-between"><span>Threat Level:</span><span class="text-red-500 font-bold">HIGH</span></div>
+                    <div class="flex justify-between"><span>Charges:</span><span class="font-bold">Multiple Felonies</span></div>
+                </div>
+                <div class="mt-8 bg-red-900/30 border border-red-800 py-3 text-center text-xs font-bold tracking-widest">
+                    ACTIVE WARRANT
+                </div>
+            </div>
+
+            <!-- Speedy Rose -->
+            <div class="wanted-card bg-[#1a1a1a] border-4 border-[#1e293b] p-6">
+                <div class="text-center border-b border-red-900 pb-4 mb-4">
+                    <h2 class="text-4xl font-black text-red-500 tracking-widest">WANTED</h2>
+                    <p class="text-xs text-gray-400">DEPT. OF JUSTICE • GEORGIA</p>
+                </div>
+                <div class="bg-black aspect-square flex items-center justify-center mb-6 overflow-hidden border border-gray-700">
+                    <span class="text-8xl opacity-30">👤</span>
+                </div>
+                <h3 class="text-2xl font-bold">Speedy Rose</h3>
+                <p class="text-sm text-gray-400">"Rose"</p>
+                <div class="mt-6 space-y-3 text-sm">
+                    <div class="flex justify-between"><span>Threat Level:</span><span class="text-orange-500 font-bold">MEDIUM</span></div>
+                    <div class="flex justify-between"><span>Charges:</span><span class="font-bold">9 COUNTS</span></div>
+                </div>
+                <div class="mt-8 bg-red-900/30 border border-red-800 py-3 text-center text-xs font-bold tracking-widest">
+                    ACTIVE WARRANT
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-24 border-t border-gray-800 pt-12 text-center text-xs text-gray-500">
+            <p>© 2026 Georgia Department of Justice • GSRP Roleplay</p>
+            <p class="mt-2">Not affiliated with any real government agency.</p>
+        </footer>
+    </main>
+
+</body>
+</html>
