@@ -13,7 +13,7 @@ body {
     overflow-x: hidden;
 }
 
-/* DARK LAYER */
+/* DARK OVERLAY */
 body::before {
     content: '';
     position: fixed;
@@ -22,14 +22,14 @@ body::before {
     z-index: -10;
 }
 
-/* NEON */
+/* NEON TEXT */
 .neon-green {
     color: #a3e635;
     text-shadow: 0 0 20px #a3e635;
 }
 
 /* =========================
-   🌫 FOG (FIXED IMAGE)
+   🌫 FOG (FIXED + STABLE)
 ========================= */
 .fog {
     position: fixed;
@@ -44,27 +44,37 @@ body::before {
 }
 
 @keyframes fogMove {
-    0%   { transform: translateX(0px) scale(1.1); }
-    50%  { transform: translateX(-80px) scale(1.2); }
+    0% { transform: translateX(0px) scale(1.1); }
+    50% { transform: translateX(-80px) scale(1.2); }
     100% { transform: translateX(0px) scale(1.1); }
 }
 
-/* 🌧 RAIN */
+/* =========================
+   🌧 CSS RAIN (NO IMAGES = NO ERRORS)
+========================= */
 .rain {
     position: fixed;
     inset: 0;
-    background: url('https://i.imgur.com/7QF3y7X.png');
-    opacity: 0.15;
-    animation: rainMove 0.4s linear infinite;
+    background-image: linear-gradient(
+        transparent 0%,
+        rgba(255,255,255,0.05) 50%,
+        transparent 100%
+    );
+    background-size: 2px 120px;
+    animation: rainMove 0.45s linear infinite;
     z-index: -5;
+    pointer-events: none;
+    opacity: 0.25;
 }
 
 @keyframes rainMove {
     from { background-position: 0 0; }
-    to { background-position: 0 100px; }
+    to { background-position: 0 120px; }
 }
 
-/* 📡 RADAR */
+/* =========================
+   📡 RADAR
+========================= */
 .radar {
     position: fixed;
     top: 50%;
@@ -81,10 +91,12 @@ body::before {
 
 @keyframes radarSpin {
     from { transform: translate(-50%, -50%) rotate(0deg); }
-    to   { transform: translate(-50%, -50%) rotate(360deg); }
+    to { transform: translate(-50%, -50%) rotate(360deg); }
 }
 
-/* 🟢 BLOBS */
+/* =========================
+   🟢 FLOATING BLOBS
+========================= */
 .blob {
     position: fixed;
     width: 240px;
@@ -102,7 +114,9 @@ body::before {
     100% { transform: translate(-60px,70px); opacity:0.2; }
 }
 
-/* ⚡ LIGHTNING */
+/* =========================
+   ⚡ LIGHTNING
+========================= */
 #lightning {
     position: fixed;
     inset: 0;
@@ -110,6 +124,13 @@ body::before {
     opacity: 0;
     z-index: 20;
     pointer-events: none;
+}
+
+/* =========================
+   LOADING BAR
+========================= */
+#progress {
+    transition: width 0.2s ease;
 }
 </style>
 </head>
@@ -128,18 +149,17 @@ body::before {
 <div class="blob" style="top:30%; left:80%;"></div>
 <div class="blob" style="top:75%; left:20%;"></div>
 
-<!-- LOADING SCREEN (RESTORED PROGRESS BAR) -->
+<!-- LOADING SCREEN -->
 <div id="loading-screen" class="fixed inset-0 bg-black flex flex-col items-center justify-center z-50">
 
     <h1 class="text-5xl neon-green font-black mb-4">GOLDEN STATE ROLEPLAY</h1>
-    <p class="text-[#a3e635] mb-8">v2.0.1 LOADING SYSTEM</p>
+    <p class="text-[#a3e635] mb-8">v2.0.1 SYSTEM BOOT</p>
 
-    <!-- PROGRESS BAR -->
     <div class="w-96 h-2 bg-zinc-800 rounded-full overflow-hidden">
         <div id="progress" class="h-full bg-[#a3e635] w-0"></div>
     </div>
 
-    <p class="text-gray-400 mt-4 text-sm">INITIALIZING LIVE EVENT SYSTEM...</p>
+    <p class="text-gray-400 mt-4 text-sm">INITIALIZING ENVIRONMENT...</p>
 </div>
 
 <!-- MAIN -->
@@ -178,30 +198,26 @@ body::before {
 
 <script>
 
-/* =========================
-   LOADING PROGRESS BAR
-========================= */
+/* LOADING BAR */
 window.onload = () => {
-    let progress = 0;
+    let p = 0;
     const bar = document.getElementById("progress");
 
     const load = setInterval(() => {
-        progress += 1;
-        bar.style.width = progress + "%";
+        p++;
+        bar.style.width = p + "%";
 
-        if(progress >= 100){
+        if(p >= 100){
             clearInterval(load);
             document.getElementById("loading-screen").style.display = "none";
             document.getElementById("main-content").classList.remove("hidden");
 
             lightningLoop();
         }
-    }, 70);
+    }, 60);
 };
 
-/* =========================
-   LIGHTNING
-========================= */
+/* LIGHTNING */
 function lightningLoop(){
     const flash = document.getElementById("lightning");
 
@@ -213,9 +229,7 @@ function lightningLoop(){
     }, 1800);
 }
 
-/* =========================
-   COUNTDOWN + CONNECT
-========================= */
+/* COUNTDOWN SYSTEM */
 function startCountdown(timerId, btnId, target, link){
     const timer = document.getElementById(timerId);
     const btn = document.getElementById(btnId);
@@ -228,7 +242,6 @@ function startCountdown(timerId, btnId, target, link){
 
             btn.disabled = false;
             btn.className = "w-full bg-[#a3e635] py-4 rounded-xl font-bold";
-
             btn.innerHTML = "CONNECT NOW";
 
             btn.onclick = () => {
