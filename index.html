@@ -35,14 +35,14 @@
 </head>
 <body class="text-white min-h-screen">
 
-    <!-- LOADING SCREEN (48 seconds) -->
+    <!-- LOADING SCREEN (12 seconds) -->
     <div id="loading-screen" class="fixed inset-0 bg-black flex flex-col items-center justify-center z-50">
         <div class="text-center">
             <img src="https://i.imgur.com/vB2Gt8p.png" alt="GSRP Logo" class="h-32 mx-auto mb-8">
             <h1 class="text-5xl font-black tracking-widest neon-green mb-4">GOLDEN STATE ROLEPLAY</h1>
             <div class="flex items-center justify-center gap-3 text-[#a3e635] font-mono mb-8">
                 <div class="w-3 h-3 bg-[#a3e635] rounded-full animate-ping"></div>
-                <span>LOADING IMMERSIVE EXPERIENCE...</span>
+                <span>LOADING IMMERSIVE ROLEPLAY EXPERIENCE...</span>
             </div>
             <div class="w-96 h-1.5 bg-zinc-800 rounded-full overflow-hidden mx-auto">
                 <div id="progress" class="h-full bg-[#a3e635] w-0 transition-all duration-300"></div>
@@ -64,13 +64,11 @@
                     </div>
                 </div>
                 <div class="hidden md:flex gap-8 text-sm font-medium">
-                    <a href="#" class="hover:text-[#a3e635]">Home</a>
-                    <a href="#" class="hover:text-[#a3e635]">FiveM Servers</a>
-                    <a href="#" class="hover:text-[#a3e635]">Roblox</a>
-                    <a href="#" class="hover:text-[#a3e635]">Community</a>
-                    <a href="#" class="hover:text-[#a3e635]">Discord</a>
+                    <a href="#fivem" class="hover:text-[#a3e635]">FiveM</a>
+                    <a href="#roblox" class="hover:text-[#a3e635]">Roblox</a>
+                    <a href="#community" class="hover:text-[#a3e635]">Community</a>
                 </div>
-                <a href="#" onclick="alert('Join our Discord!')" 
+                <a href="https://discord.gg/m34XMdwCvX" target="_blank" 
                    class="bg-[#a3e635] text-black px-6 py-3 rounded-xl font-bold hover:bg-[#bef575]">
                     JOIN DISCORD
                 </a>
@@ -83,87 +81,112 @@
                 GOLDEN STATE ROLEPLAY
             </h1>
             <p class="text-2xl text-gray-300 max-w-3xl mx-auto">
-                The ultimate immersive roleplay experience across FiveM and Roblox
+                Premium FiveM & Roblox Roleplay Community
             </p>
-            <div class="mt-10 flex flex-wrap justify-center gap-4">
-                <button onclick="document.getElementById('servers').scrollIntoView({behavior:'smooth'})"
-                        class="bg-[#a3e635] text-black px-10 py-4 rounded-2xl font-bold text-lg">
-                    JOIN OUR SERVERS
-                </button>
+        </section>
+
+        <!-- FiveM Servers Section -->
+        <section id="fivem" class="max-w-7xl mx-auto px-6 py-20 bg-black/60">
+            <h2 class="text-5xl font-black text-center neon-green mb-16">FIVEM SERVERS</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="bg-zinc-900 border border-[#a3e635]/30 rounded-3xl p-10 crt">
+                    <h3 class="text-3xl font-bold mb-4">Economy Roleplay</h3>
+                    <p class="text-gray-400 mb-8">Our main server with a deep player-driven economy, custom jobs, housing, vehicles, and realistic law enforcement.</p>
+                    <ul class="space-y-3 text-sm mb-10">
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-[#a3e635]"></i> Custom Framework</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-[#a3e635]"></i> Advanced Economy</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-[#a3e635]"></i> High Population</li>
+                    </ul>
+                    <button onclick="alert('FiveM Economy Server IP copied to clipboard!')" 
+                            class="w-full bg-[#a3e635] text-black py-5 rounded-2xl font-bold text-lg">CONNECT TO ECONOMY SERVER</button>
+                </div>
+
+                <div class="bg-zinc-900 border border-[#a3e635]/30 rounded-3xl p-10 crt">
+                    <h3 class="text-3xl font-bold mb-4">Standalone Roleplay</h3>
+                    <p class="text-gray-400 mb-8">Serious roleplay server focused on quality roleplay, minimal mods, and immersive storytelling.</p>
+                    <ul class="space-y-3 text-sm mb-10">
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-[#a3e635]"></i> Serious RP Environment</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-[#a3e635]"></i> Strict Rules</li>
+                        <li class="flex items-center gap-3"><i class="fas fa-check text-[#a3e635]"></i> Experienced Players</li>
+                    </ul>
+                    <button onclick="alert('FiveM Standalone Server IP copied to clipboard!')" 
+                            class="w-full bg-[#a3e635] text-black py-5 rounded-2xl font-bold text-lg">CONNECT TO STANDALONE SERVER</button>
+                </div>
             </div>
         </section>
 
-        <!-- Servers Section -->
-        <section id="servers" class="max-w-7xl mx-auto px-6 py-20">
-            <h2 class="text-4xl font-bold text-center mb-16 neon-green">OUR SERVERS</h2>
+        <!-- Roblox Section -->
+        <section id="roblox" class="max-w-7xl mx-auto px-6 py-20">
+            <h2 class="text-5xl font-black text-center neon-green mb-16">ROBLOX SERVERS</h2>
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="bg-zinc-900 border border-[#a3e635]/30 rounded-3xl p-10 crt">
+                    <h3 class="text-3xl font-bold mb-4">City Life Roleplay</h3>
+                    <p class="text-gray-400">Experience life in the city with jobs, housing, vehicles, and interactive roleplay scenarios.</p>
+                    <button onclick="alert('Join our Roblox City Life Experience!')" 
+                            class="mt-10 w-full bg-[#a3e635] text-black py-5 rounded-2xl font-bold">PLAY ON ROBLOX</button>
+                </div>
+
+                <div class="bg-zinc-900 border border-[#a3e635]/30 rounded-3xl p-10 crt">
+                    <h3 class="text-3xl font-bold mb-4">Police Academy & Patrol</h3>
+                    <p class="text-gray-400">Train to become a police officer, participate in high-intensity patrols and emergency responses.</p>
+                    <button onclick="alert('Join our Roblox Police Roleplay!')" 
+                            class="mt-10 w-full bg-[#a3e635] text-black py-5 rounded-2xl font-bold">PLAY ON ROBLOX</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Community / Staff Section -->
+        <section id="community" class="max-w-7xl mx-auto px-6 py-20 bg-black/60">
+            <h2 class="text-5xl font-black text-center neon-green mb-16">OUR COMMUNITY</h2>
             
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- FiveM Economy RP -->
-                <div class="bg-black/70 border border-[#a3e635]/30 rounded-3xl p-8 hover:border-[#a3e635] transition-all crt">
-                    <h3 class="text-2xl font-bold mb-4">FiveM Economy Roleplay</h3>
-                    <p class="text-gray-400 mb-6">The flagship server. Deep economy, player-driven businesses, custom scripts, and realistic law enforcement.</p>
-                    <div class="space-y-3 text-sm">
-                        <div class="flex justify-between"><span>Server Type:</span><span class="text-emerald-400">Economy RP</span></div>
-                        <div class="flex justify-between"><span>Framework:</span><span>Custom</span></div>
-                        <div class="flex justify-between"><span>Players:</span><span class="text-emerald-400">High Population</span></div>
+            <div class="grid md:grid-cols-2 gap-10 max-w-4xl mx-auto">
+                <!-- Tristan Andrew -->
+                <div class="bg-zinc-900 border border-[#a3e635]/30 rounded-3xl p-8 text-center">
+                    <div class="w-24 h-24 mx-auto bg-gradient-to-br from-[#a3e635] to-green-600 rounded-2xl flex items-center justify-center text-4xl font-bold mb-6">TA</div>
+                    <h3 class="text-2xl font-bold">Tristan Andrew</h3>
+                    <p class="text-[#a3e635] mb-4">Owner / Founder</p>
+                    <div class="grid grid-cols-2 gap-4 text-sm mt-6">
+                        <div><span class="text-gray-400">Police:</span><br><span class="text-emerald-400 font-bold">ACTIVE</span></div>
+                        <div><span class="text-gray-400">Fire/EMS:</span><br><span class="text-red-400">INACTIVE</span></div>
+                        <div class="col-span-2"><span class="text-gray-400">Callsign:</span><br><span class="font-mono text-xl">100</span></div>
                     </div>
-                    <button onclick="alert('Connecting to FiveM Economy Server... (IP copied)')" 
-                            class="mt-8 w-full bg-[#a3e635] text-black py-4 rounded-2xl font-bold">CONNECT TO SERVER</button>
                 </div>
 
-                <!-- FiveM Standalone -->
-                <div class="bg-black/70 border border-[#a3e635]/30 rounded-3xl p-8 hover:border-[#a3e635] transition-all crt">
-                    <h3 class="text-2xl font-bold mb-4">FiveM Standalone</h3>
-                    <p class="text-gray-400 mb-6">Serious roleplay focused server with minimal mods and maximum realism. Perfect for experienced roleplayers.</p>
-                    <div class="space-y-3 text-sm">
-                        <div class="flex justify-between"><span>Server Type:</span><span class="text-emerald-400">Standalone RP</span></div>
-                        <div class="flex justify-between"><span>Style:</span><span>Serious RP</span></div>
+                <!-- Lee Howard -->
+                <div class="bg-zinc-900 border border-[#a3e635]/30 rounded-3xl p-8 text-center">
+                    <div class="w-24 h-24 mx-auto bg-gradient-to-br from-[#a3e635] to-green-600 rounded-2xl flex items-center justify-center text-4xl font-bold mb-6">LH</div>
+                    <h3 class="text-2xl font-bold">Lee Howard</h3>
+                    <p class="text-[#a3e635] mb-4">Owner / Founder</p>
+                    <div class="grid grid-cols-2 gap-4 text-sm mt-6">
+                        <div><span class="text-gray-400">Police:</span><br><span class="text-emerald-400 font-bold">ACTIVE</span></div>
+                        <div><span class="text-gray-400">Fire/EMS:</span><br><span class="text-red-400">INACTIVE</span></div>
+                        <div class="col-span-2"><span class="text-gray-400">Callsign:</span><br><span class="font-mono text-xl">100</span></div>
                     </div>
-                    <button onclick="alert('Connecting to FiveM Standalone Server...')" 
-                            class="mt-8 w-full bg-[#a3e635] text-black py-4 rounded-2xl font-bold">CONNECT TO SERVER</button>
                 </div>
+            </div>
 
-                <!-- Roblox Servers -->
-                <div class="bg-black/70 border border-[#a3e635]/30 rounded-3xl p-8 hover:border-[#a3e635] transition-all crt">
-                    <h3 class="text-2xl font-bold mb-4">Roblox Servers</h3>
-                    <p class="text-gray-400 mb-6">Multiple Roblox experiences including city life, police academy, and roleplay simulators.</p>
-                    <div class="space-y-3 text-sm">
-                        <div class="flex justify-between"><span>Platforms:</span><span class="text-emerald-400">Roblox</span></div>
-                        <div class="flex justify-between"><span>Experiences:</span><span>City RP, Police RP</span></div>
-                    </div>
-                    <button onclick="alert('Join our Roblox Group!')" 
-                            class="mt-8 w-full bg-[#a3e635] text-black py-4 rounded-2xl font-bold">PLAY ON ROBLOX</button>
-                </div>
+            <div class="text-center mt-12">
+                <a href="https://discord.gg/m34XMdwCvX" target="_blank" 
+                   class="inline-flex items-center gap-3 bg-[#a3e635] text-black px-8 py-4 rounded-2xl font-bold text-lg hover:bg-[#bef575]">
+                    <i class="fab fa-discord"></i> JOIN OUR DISCORD
+                </a>
             </div>
         </section>
 
-        <!-- About -->
-        <section class="bg-black/70 py-20">
-            <div class="max-w-4xl mx-auto px-6 text-center">
-                <h2 class="text-4xl font-bold neon-green mb-8">Welcome to Golden State Roleplay</h2>
-                <p class="text-lg text-gray-300 leading-relaxed">
-                    We are a premier roleplay community offering high-quality FiveM Economy and Standalone servers, 
-                    along with engaging Roblox experiences. Our goal is to provide the most immersive, realistic, 
-                    and fun roleplay environment possible.
-                </p>
-            </div>
-        </section>
-
-        <footer class="bg-black py-12 text-center text-gray-500 text-sm border-t border-[#a3e635]/20">
-            <p class="mb-2">© 2026 Golden State Roleplay • All Rights Reserved</p>
-            <p>FiveM Economy RP • FiveM Standalone • Roblox Roleplay</p>
+        <footer class="bg-black py-12 text-center text-gray-500 border-t border-[#a3e635]/20">
+            <p>© 2026 Golden State Roleplay • FiveM & Roblox Community</p>
         </footer>
     </div>
 
     <script>
-        // 48 Second Loading
+        // 12 Second Loading
         window.onload = () => {
             let progress = 0;
             const progressBar = document.getElementById('progress');
             const loadingScreen = document.getElementById('loading-screen');
             const mainContent = document.getElementById('main-content');
 
-            const totalTime = 48000;
+            const totalTime = 12000; // 12 seconds
             const interval = 80;
             const steps = totalTime / interval;
             let current = 0;
@@ -179,7 +202,7 @@
                     setTimeout(() => {
                         loadingScreen.classList.add('hidden');
                         mainContent.classList.remove('hidden');
-                    }, 800);
+                    }, 600);
                 }
             }, interval);
         };
