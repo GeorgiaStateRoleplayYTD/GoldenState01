@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Golden State Roleplay - v2.0.1</title>
+<title>Golden State Roleplay - v2.0.1 Feature Event</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 body {
@@ -22,9 +22,7 @@ body::before {
     text-shadow: 0 0 20px #a3e635;
 }
 
-/* =========================
-   FOG + RAIN + RADAR + BLOBS
-========================= */
+/* Effects */
 .fog {
     position: fixed;
     inset: 0;
@@ -45,11 +43,7 @@ body::before {
 .rain {
     position: fixed;
     inset: 0;
-    background-image: linear-gradient(
-        transparent 0%,
-        rgba(255,255,255,0.05) 50%,
-        transparent 100%
-    );
+    background-image: linear-gradient(transparent 0%, rgba(255,255,255,0.05) 50%, transparent 100%);
     background-size: 2px 120px;
     animation: rainMove 0.45s linear infinite;
     z-index: -5;
@@ -109,6 +103,12 @@ body::before {
     gap: 10px;
     backdrop-filter: blur(8px);
 }
+
+/* Date & Time */
+#current-time {
+    font-family: monospace;
+    letter-spacing: 2px;
+}
 </style>
 </head>
 <body class="text-white min-h-screen">
@@ -140,7 +140,7 @@ body::before {
 <!-- LOADING SCREEN -->
 <div id="loading-screen" class="fixed inset-0 bg-black flex flex-col items-center justify-center z-50">
     <h1 class="text-5xl neon-green font-black mb-4">GOLDEN STATE ROLEPLAY</h1>
-    <p class="text-[#a3e635] mb-8">v2.0.1 SYSTEM BOOT</p>
+    <p class="text-[#a3e635] mb-8">v2.0.1 FEATURE EVENT</p>
     <div class="w-96 h-2 bg-zinc-800 rounded-full overflow-hidden">
         <div id="progress" class="h-full bg-[#a3e635] w-0"></div>
     </div>
@@ -150,7 +150,13 @@ body::before {
 <!-- MAIN CONTENT -->
 <div id="main-content" class="hidden text-center py-20">
     <h1 class="text-6xl neon-green font-black">LIVE EVENTS</h1>
-    <div class="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto mt-16">
+    
+    <!-- Current Date & Time -->
+    <div class="mt-6 text-[#a3e635] text-xl" id="current-time">
+        Loading date &amp; time...
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto mt-12">
         <!-- Standalone -->
         <div class="bg-zinc-900 p-8 rounded-3xl">
             <h2 class="text-2xl font-bold mb-3">Standalone</h2>
@@ -164,10 +170,34 @@ body::before {
             <button id="qbcore-btn" disabled class="w-full bg-gray-600 py-4 rounded-xl font-bold opacity-50">EVENT LOCKED</button>
         </div>
     </div>
+
+    <!-- Bottom Note -->
+    <div class="mt-16 text-gray-400 text-sm max-w-2xl mx-auto px-6">
+        You guys are very welcome to stream and help the community out promoting it ❤️
+    </div>
 </div>
 
 <script>
-/* LOADING BAR */
+// Live Date & Time
+function updateDateTime() {
+    const now = new Date();
+    const options = { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        hour12: true 
+    };
+    const timeString = now.toLocaleString('en-US', options);
+    document.getElementById("current-time").textContent = timeString;
+}
+setInterval(updateDateTime, 1000);
+updateDateTime();
+
+// LOADING BAR
 window.onload = () => {
     let p = 0;
     const bar = document.getElementById("progress");
@@ -179,7 +209,6 @@ window.onload = () => {
             document.getElementById("loading-screen").style.display = "none";
             document.getElementById("main-content").classList.remove("hidden");
             
-            // Auto attempt to play music after load
             setTimeout(() => {
                 document.getElementById("bg-music").play().catch(() => {});
             }, 600);
@@ -187,7 +216,7 @@ window.onload = () => {
     }, 60);
 };
 
-/* MUSIC CONTROL */
+// MUSIC CONTROL
 let isPlaying = true;
 const audio = document.getElementById("bg-music");
 
@@ -204,7 +233,7 @@ function toggleMusic() {
     isPlaying = !isPlaying;
 }
 
-/* COUNTDOWN */
+// COUNTDOWN FUNCTION
 function startCountdown(timerId, btnId, target, link){
     const timer = document.getElementById(timerId);
     const btn = document.getElementById(btnId);
@@ -229,7 +258,7 @@ function startCountdown(timerId, btnId, target, link){
     setInterval(update, 1000);
 }
 
-/* Start Countdowns */
+// Start Countdowns
 startCountdown("standalone-timer", "standalone-btn", new Date("2026-05-08T16:45:00-06:00").getTime(), "fivem://connect/STANDALONE_IP");
 startCountdown("qbcore-timer", "qbcore-btn", new Date("2026-05-09T16:45:00-06:00").getTime(), "fivem://connect/QBCORE_IP");
 </script>
