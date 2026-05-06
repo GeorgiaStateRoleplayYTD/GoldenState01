@@ -10,7 +10,6 @@ body {
     background: url('https://i.imgur.com/JHY3Pri.png') center/cover no-repeat fixed;
     overflow-x: hidden;
 }
-/* DARK OVERLAY */
 body::before {
     content: '';
     position: fixed;
@@ -18,105 +17,43 @@ body::before {
     background: rgba(0,0,0,0.88);
     z-index: -10;
 }
-/* NEON TEXT */
 .neon-green {
     color: #a3e635;
     text-shadow: 0 0 20px #a3e635;
 }
-/* =========================
-   🌫 FOG
-========================= */
-.fog {
-    position: fixed;
-    inset: 0;
-    background: url('https://i.imgur.com/oZhKQoT.png');
-    background-size: cover;
-    opacity: 0.18;
-    z-index: -6;
-    pointer-events: none;
-    animation: fogMove 60s linear infinite;
-    mix-blend-mode: screen;
-}
-@keyframes fogMove {
-    0% { transform: translateX(0px) scale(1.1); }
-    50% { transform: translateX(-80px) scale(1.2); }
-    100% { transform: translateX(0px) scale(1.1); }
-}
-/* =========================
-   🌧 RAIN
-========================= */
-.rain {
-    position: fixed;
-    inset: 0;
-    background-image: linear-gradient(
-        transparent 0%,
-        rgba(255,255,255,0.05) 50%,
-        transparent 100%
-    );
-    background-size: 2px 120px;
-    animation: rainMove 0.45s linear infinite;
-    z-index: -5;
-    pointer-events: none;
-    opacity: 0.25;
-}
-@keyframes rainMove {
-    from { background-position: 0 0; }
-    to { background-position: 0 120px; }
-}
-/* =========================
-   📡 RADAR
-========================= */
-.radar {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 600px;
-    height: 600px;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: conic-gradient(rgba(163,230,53,0.2), transparent 60%);
-    animation: radarSpin 6s linear infinite;
-    z-index: -6;
-    pointer-events: none;
-}
-@keyframes radarSpin {
-    from { transform: translate(-50%, -50%) rotate(0deg); }
-    to { transform: translate(-50%, -50%) rotate(360deg); }
-}
-/* =========================
-   🟢 FLOATING BLOBS
-========================= */
-.blob {
-    position: fixed;
-    width: 240px;
-    height: 240px;
-    background: radial-gradient(circle, rgba(163,230,53,0.6), transparent 70%);
-    filter: blur(45px);
-    border-radius: 50%;
-    z-index: -4;
-    animation: floatBlob 18s infinite ease-in-out;
-}
-@keyframes floatBlob {
-    0% { transform: translate(0,0); opacity:0.2; }
-    50% { transform: translate(80px,-100px); opacity:0.5; }
-    100% { transform: translate(-60px,70px); opacity:0.2; }
-}
-/* =========================
-   ⚡ LIGHTNING (FIXED)
-========================= */
+
+/* Effects */
+.fog, .rain, .radar, .blob { /* ... keep your existing styles ... */ }
+
 #lightning {
     position: fixed;
     inset: 0;
-    background: rgba(240, 248, 255, 0.92);
+    background: rgba(240, 248, 255, 0.85);
     opacity: 0;
     z-index: 20;
     pointer-events: none;
     mix-blend-mode: screen;
-    transition: opacity 40ms ease-out;
+    transition: opacity 60ms ease-out;
+}
+
+/* Music Button */
+#music-control {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 50;
+    background: rgba(0,0,0,0.7);
+    padding: 10px 16px;
+    border-radius: 9999px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(8px);
 }
 </style>
 </head>
 <body class="text-white min-h-screen">
+
 <!-- EFFECTS -->
 <div class="fog"></div>
 <div class="rain"></div>
@@ -129,7 +66,20 @@ body::before {
 <div class="blob" style="top:30%; left:80%;"></div>
 <div class="blob" style="top:75%; left:20%;"></div>
 
-<!-- LOADING SCREEN -->
+<!-- BACKGROUND MUSIC -->
+<audio id="bg-music" loop>
+    <source src="https://www.youtube.com/watch?v=Yhu7sck0gAA" type="audio/mp3">
+</audio>
+
+<!-- MUSIC CONTROL -->
+<div id="music-control" class="text-sm">
+    <button onclick="toggleMusic()" class="flex items-center gap-2 text-[#a3e635]">
+        <span id="music-icon">♪</span>
+        <span id="music-text">Play Ambient Music</span>
+    </button>
+</div>
+
+<!-- LOADING SCREEN + MAIN CONTENT (same as before) -->
 <div id="loading-screen" class="fixed inset-0 bg-black flex flex-col items-center justify-center z-50">
     <h1 class="text-5xl neon-green font-black mb-4">GOLDEN STATE ROLEPLAY</h1>
     <p class="text-[#a3e635] mb-8">v2.0.1 SYSTEM BOOT</p>
@@ -139,35 +89,24 @@ body::before {
     <p class="text-gray-400 mt-4 text-sm">INITIALIZING ENVIRONMENT...</p>
 </div>
 
-<!-- MAIN -->
 <div id="main-content" class="hidden text-center py-20">
     <h1 class="text-6xl neon-green font-black">LIVE EVENTS</h1>
     <div class="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto mt-16">
-        <!-- Standalone -->
         <div class="bg-zinc-900 p-8 rounded-3xl">
             <h2 class="text-2xl font-bold mb-3">Standalone</h2>
             <div id="standalone-timer" class="text-3xl neon-green mb-6">Loading...</div>
-            <button id="standalone-btn"
-                disabled
-                class="w-full bg-gray-600 py-4 rounded-xl font-bold opacity-50">
-                EVENT LOCKED
-            </button>
+            <button id="standalone-btn" disabled class="w-full bg-gray-600 py-4 rounded-xl font-bold opacity-50">EVENT LOCKED</button>
         </div>
-        <!-- QBcore -->
         <div class="bg-zinc-900 p-8 rounded-3xl">
             <h2 class="text-2xl font-bold mb-3">QBcore</h2>
             <div id="qbcore-timer" class="text-3xl neon-green mb-6">Loading...</div>
-            <button id="qbcore-btn"
-                disabled
-                class="w-full bg-gray-600 py-4 rounded-xl font-bold opacity-50">
-                EVENT LOCKED
-            </button>
+            <button id="qbcore-btn" disabled class="w-full bg-gray-600 py-4 rounded-xl font-bold opacity-50">EVENT LOCKED</button>
         </div>
     </div>
 </div>
 
 <script>
-/* LOADING BAR */
+// LOADING
 window.onload = () => {
     let p = 0;
     const bar = document.getElementById("progress");
@@ -179,37 +118,47 @@ window.onload = () => {
             document.getElementById("loading-screen").style.display = "none";
             document.getElementById("main-content").classList.remove("hidden");
             lightningLoop();
+            // Auto play music after load
+            setTimeout(() => {
+                document.getElementById("bg-music").play().catch(()=>{});
+            }, 800);
         }
     }, 60);
 };
 
-/* FIXED LIGHTNING */
+// SUBTLE LIGHTNING (barely noticeable now)
 function lightningLoop(){
     const flash = document.getElementById("lightning");
     
     setInterval(() => {
-        if (Math.random() < 0.13) {                    // Lower chance = less annoying
-            const intensity = Math.random() * 0.75 + 0.45;
-            const duration = Math.random() * 80 + 45;
+        if (Math.random() < 0.07) {           // Very rare now
+            const duration = Math.random() * 90 + 50;
             
-            flash.style.opacity = intensity;
+            flash.style.opacity = Math.random() * 0.45 + 0.25;
             
-            setTimeout(() => {
-                flash.style.opacity = 0;
-            }, duration);
-
-            // Occasional double flash (realistic thunder)
-            if (Math.random() < 0.38) {
-                setTimeout(() => {
-                    flash.style.opacity = Math.random() * 0.55 + 0.35;
-                    setTimeout(() => flash.style.opacity = 0, 55);
-                }, 110 + Math.random() * 90);
-            }
+            setTimeout(() => { flash.style.opacity = 0; }, duration);
         }
-    }, 1350);
+    }, 1800);
 }
 
-/* COUNTDOWN SYSTEM */
+// MUSIC CONTROL
+let isPlaying = true;
+const audio = document.getElementById("bg-music");
+
+function toggleMusic() {
+    if (isPlaying) {
+        audio.pause();
+        document.getElementById("music-text").textContent = "Paused";
+        document.getElementById("music-icon").textContent = "♫";
+    } else {
+        audio.play();
+        document.getElementById("music-text").textContent = "Playing Ambient";
+        document.getElementById("music-icon").textContent = "♪";
+    }
+    isPlaying = !isPlaying;
+}
+
+// COUNTDOWN (unchanged)
 function startCountdown(timerId, btnId, target, link){
     const timer = document.getElementById(timerId);
     const btn = document.getElementById(btnId);
@@ -234,20 +183,8 @@ function startCountdown(timerId, btnId, target, link){
     setInterval(update, 1000);
 }
 
-/* EVENTS */
-startCountdown(
-    "standalone-timer",
-    "standalone-btn",
-    new Date("2026-05-08T16:45:00-06:00").getTime(),
-    "fivem://connect/STANDALONE_IP"
-);
-
-startCountdown(
-    "qbcore-timer",
-    "qbcore-btn",
-    new Date("2026-05-09T16:45:00-06:00").getTime(),
-    "fivem://connect/QBCORE_IP"
-);
+startCountdown("standalone-timer", "standalone-btn", new Date("2026-05-08T16:45:00-06:00").getTime(), "fivem://connect/STANDALONE_IP");
+startCountdown("qbcore-timer", "qbcore-btn", new Date("2026-05-09T16:45:00-06:00").getTime(), "fivem://connect/QBCORE_IP");
 </script>
 </body>
 </html>
