@@ -1,175 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Golden State Roleplay - v2.0.1</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    <link rel="icon" href="https://i.imgur.com/vB2Gt8p.png" type="image/png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Golden State Roleplay - v2.0.1</title>
 
-    <style>
-        body {
-            background: url('https://i.imgur.com/JHY3Pri.png') center/cover no-repeat fixed;
-        }
-        body::before {
-            content: '';
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.88);
-            z-index: -1;
-        }
-        .neon-green {
-            color: #a3e635;
-            text-shadow: 0 0 20px #a3e635;
-        }
-        .crt { position: relative; }
-        .crt::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(
-                transparent 0px,
-                transparent 2px,
-                rgba(163, 230, 53, 0.08) 2px,
-                rgba(163, 230, 53, 0.08) 4px
-            );
-            pointer-events: none;
-        }
-    </style>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+<style>
+body {
+    background: url('https://i.imgur.com/JHY3Pri.png') center/cover no-repeat fixed;
+    overflow-x: hidden;
+}
+
+/* DARK OVERLAY */
+body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.88);
+    z-index: -3;
+}
+
+/* NEON TEXT */
+.neon-green {
+    color: #a3e635;
+    text-shadow: 0 0 20px #a3e635;
+}
+
+/* CRT EFFECT */
+.crt::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        transparent 0px,
+        transparent 2px,
+        rgba(163,230,53,0.08) 2px,
+        rgba(163,230,53,0.08) 4px
+    );
+    pointer-events: none;
+}
+
+/* =========================
+   🟢 FLOATING BLOBS
+========================= */
+.blob {
+    position: fixed;
+    width: 260px;
+    height: 260px;
+    background: radial-gradient(circle, rgba(163,230,53,0.6), transparent 70%);
+    filter: blur(45px);
+    border-radius: 50%;
+    z-index: -2;
+    animation: floatBlob 18s infinite ease-in-out;
+    pointer-events: none;
+}
+
+@keyframes floatBlob {
+    0%   { transform: translate(0,0) scale(1); opacity:0.25; }
+    50%  { transform: translate(80px,-100px) scale(1.2); opacity:0.45; }
+    100% { transform: translate(-60px,70px) scale(1); opacity:0.25; }
+}
+
+/* =========================
+   ⚡ LIGHTNING FLASH
+========================= */
+#lightning {
+    position: fixed;
+    inset: 0;
+    background: white;
+    opacity: 0;
+    z-index: 5;
+    pointer-events: none;
+}
+
+/* =========================
+   🌧 RAIN EFFECT
+========================= */
+.rain {
+    position: fixed;
+    inset: 0;
+    background: url('https://i.imgur.com/7QF3y7X.png');
+    opacity: 0.15;
+    animation: rainMove 0.4s linear infinite;
+    z-index: -1;
+    pointer-events: none;
+}
+
+@keyframes rainMove {
+    from { background-position: 0 0; }
+    to { background-position: 0 100px; }
+}
+
+/* =========================
+   📡 RADAR SWEEP
+========================= */
+.radar {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    height: 600px;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    background: conic-gradient(
+        rgba(163,230,53,0.2),
+        transparent 60%
+    );
+    animation: radarSpin 6s linear infinite;
+    z-index: -2;
+    pointer-events: none;
+    filter: blur(2px);
+}
+
+@keyframes radarSpin {
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+/* =========================
+   🔴 RED ALERT MODE
+========================= */
+.red-alert body,
+.red-alert {
+    background-color: rgba(255,0,0,0.1);
+}
+</style>
 </head>
 
 <body class="text-white min-h-screen">
 
+<!-- EFFECTS -->
+<div class="rain"></div>
+<div class="radar"></div>
+<div id="lightning"></div>
+
+<!-- BLOBS -->
+<div class="blob" style="top:10%; left:15%; animation-duration:14s;"></div>
+<div class="blob" style="top:60%; left:70%; animation-duration:18s;"></div>
+<div class="blob" style="top:30%; left:80%; animation-duration:22s;"></div>
+<div class="blob" style="top:75%; left:20%; animation-duration:16s;"></div>
+
+<!-- SOUND TOGGLE -->
+<button onclick="toggleSound()"
+class="fixed bottom-6 right-6 bg-[#a3e635] text-black px-4 py-3 rounded-full font-bold z-50">
+🔊 SOUND
+</button>
+
+<audio id="ambient" loop>
+    <source src="https://cdn.pixabay.com/audio/2022/03/15/audio_9b7c3c0d5f.mp3">
+</audio>
+
 <!-- LOADING -->
 <div id="loading-screen" class="fixed inset-0 bg-black flex flex-col items-center justify-center z-50">
-    <img src="https://i.imgur.com/vB2Gt8p.png" class="h-32 mb-6">
-    <h1 class="text-5xl font-black neon-green">GOLDEN STATE ROLEPLAY</h1>
-    <p class="text-[#a3e635] mt-2">v2.0.1 UPDATE</p>
-
-    <div class="w-96 h-2 bg-zinc-800 mt-8 rounded-full overflow-hidden">
-        <div id="progress" class="h-full bg-[#a3e635] w-0"></div>
-    </div>
+    <h1 class="text-5xl neon-green font-black">GOLDEN STATE ROLEPLAY</h1>
+    <p class="text-[#a3e635] mt-2">v2.0.1</p>
 </div>
 
 <div id="main-content" class="hidden">
 
-<!-- NAV -->
-<nav class="bg-black/90 border-b border-[#a3e635]/30 sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-        <div class="flex items-center gap-4">
-            <img src="https://i.imgur.com/vB2Gt8p.png" class="h-12">
-            <div>
-                <h1 class="font-black text-xl">GOLDEN STATE</h1>
-                <p class="text-[#a3e635] text-sm">ROLEPLAY v2.0.1</p>
-            </div>
-        </div>
-
-        <a href="https://discord.gg/m34XMdwCvX"
-           class="bg-[#a3e635] text-black px-5 py-2 rounded-xl font-bold">
-            JOIN DISCORD
-        </a>
-    </div>
-</nav>
-
 <!-- HERO -->
 <section class="py-24 text-center">
-    <h1 class="text-6xl font-black neon-green">GOLDEN STATE ROLEPLAY</h1>
-    <p class="text-gray-300 mt-4">Bigger. Better. More Immersive.</p>
+    <h1 class="text-6xl neon-green font-black">GOLDEN STATE ROLEPLAY</h1>
 </section>
 
-<!-- LIVE EVENTS -->
-<section class="max-w-7xl mx-auto px-6 py-20">
-    <h2 class="text-5xl font-black text-center neon-green mb-16">LIVE EVENTS</h2>
+<!-- EVENTS -->
+<section class="max-w-6xl mx-auto px-6 py-20">
 
-    <div class="grid md:grid-cols-2 gap-10 text-center">
+<h2 class="text-4xl text-center neon-green mb-10">LIVE EVENTS</h2>
 
-        <!-- Standalone -->
-        <div class="bg-zinc-900 border border-[#a3e635]/30 rounded-3xl p-10 crt">
-            <h3 class="text-3xl font-bold mb-4">Standalone Event</h3>
-            <p class="text-gray-400 mb-6">08/05/2026 • 16:45 CST</p>
+<div class="grid md:grid-cols-2 gap-10">
 
-            <div id="standalone-timer" class="text-4xl font-mono neon-green mb-8">Loading...</div>
+<!-- Standalone -->
+<div class="bg-zinc-900 p-8 rounded-3xl crt relative">
+    <h3 class="text-2xl font-bold mb-3">Standalone</h3>
 
-            <button id="standalone-btn"
-                disabled
-                class="w-full bg-gray-600 text-black py-5 rounded-2xl font-bold opacity-50 cursor-not-allowed">
-                EVENT LOCKED
-            </button>
-        </div>
+    <div id="standalone-timer" class="text-3xl neon-green mb-6">Loading...</div>
 
-        <!-- QBcore -->
-        <div class="bg-zinc-900 border border-[#a3e635]/30 rounded-3xl p-10 crt">
-            <h3 class="text-3xl font-bold mb-4">QBcore Event</h3>
-            <p class="text-gray-400 mb-6">09/05/2026 • 16:45 CST</p>
+    <button id="standalone-btn"
+    class="w-full bg-gray-600 py-4 rounded-xl font-bold opacity-50 cursor-not-allowed"
+    disabled>
+    EVENT LOCKED
+    </button>
+</div>
 
-            <div id="qbcore-timer" class="text-4xl font-mono neon-green mb-8">Loading...</div>
+<!-- QBcore -->
+<div class="bg-zinc-900 p-8 rounded-3xl crt relative">
+    <h3 class="text-2xl font-bold mb-3">QBcore</h3>
 
-            <button id="qbcore-btn"
-                disabled
-                class="w-full bg-gray-600 text-black py-5 rounded-2xl font-bold opacity-50 cursor-not-allowed">
-                EVENT LOCKED
-            </button>
-        </div>
+    <div id="qbcore-timer" class="text-3xl neon-green mb-6">Loading...</div>
 
-    </div>
+    <button id="qbcore-btn"
+    class="w-full bg-gray-600 py-4 rounded-xl font-bold opacity-50 cursor-not-allowed"
+    disabled>
+    EVENT LOCKED
+    </button>
+</div>
+
+</div>
 </section>
-
-<footer class="text-center py-10 text-gray-500 border-t border-[#a3e635]/20">
-    Golden State Roleplay • v2.0.1 • 2026
-</footer>
 
 </div>
 
-<!-- SCRIPTS -->
 <script>
+
+/* =========================
+   LOADING
+========================= */
 window.onload = () => {
-    let progress = 0;
-    const bar = document.getElementById('progress');
-    const load = document.getElementById('loading-screen');
-    const main = document.getElementById('main-content');
+    setTimeout(() => {
+        document.getElementById("loading-screen").style.display = "none";
+        document.getElementById("main-content").classList.remove("hidden");
 
-    const interval = setInterval(() => {
-        progress += 1;
-        bar.style.width = progress + "%";
-
-        if (progress >= 100) {
-            clearInterval(interval);
-            load.style.display = "none";
-            main.classList.remove("hidden");
-        }
-    }, 80);
+        lightningLoop();
+    }, 3000);
 };
 
-// Countdown system
-function startCountdown(timerId, btnId, target, link) {
+/* =========================
+   SOUND
+========================= */
+function toggleSound(){
+    const audio = document.getElementById("ambient");
+    if(audio.paused){
+        audio.play();
+    } else {
+        audio.pause();
+    }
+}
+
+/* =========================
+   LIGHTNING
+========================= */
+function lightningLoop(){
+    const flash = document.getElementById("lightning");
+
+    setInterval(() => {
+        if(Math.random() < 0.15){
+            flash.style.opacity = 0.6;
+
+            setTimeout(() => {
+                flash.style.opacity = 0;
+            }, 120);
+        }
+    }, 2000);
+}
+
+/* =========================
+   COUNTDOWN SYSTEM
+========================= */
+function startCountdown(timerId, btnId, target, link){
     const timer = document.getElementById(timerId);
     const btn = document.getElementById(btnId);
 
-    function update() {
+    function update(){
         const now = Date.now();
         const diff = target - now;
 
-        if (diff <= 0) {
+        if(diff <= 0){
             timer.innerHTML = "🚨 EVENT LIVE 🚨";
 
             btn.disabled = false;
-            btn.className =
-                "w-full bg-[#a3e635] hover:bg-[#bef575] text-black py-5 rounded-2xl font-bold cursor-pointer";
+            btn.className = "w-full bg-[#a3e635] py-4 rounded-xl font-bold";
 
             btn.innerHTML = "CONNECT NOW";
 
             btn.onclick = () => {
+                document.body.classList.add("red-alert");
                 window.location.href = link;
             };
 
             return;
         }
 
-        const d = Math.floor(diff / (1000*60*60*24));
-        const h = Math.floor((diff / (1000*60*60)) % 24);
-        const m = Math.floor((diff / (1000*60)) % 60);
-        const s = Math.floor((diff / 1000) % 60);
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor(diff / 3600000 % 24);
+        const m = Math.floor(diff / 60000 % 60);
+        const s = Math.floor(diff / 1000 % 60);
 
         timer.innerHTML = `${d}D ${h}H ${m}M ${s}S`;
     }
@@ -178,24 +286,23 @@ function startCountdown(timerId, btnId, target, link) {
     setInterval(update, 1000);
 }
 
-// TIMES (CST)
-const standaloneTime = new Date("2026-05-08T16:45:00-06:00").getTime();
-const qbcoreTime = new Date("2026-05-09T16:45:00-06:00").getTime();
-
-// CONNECT LINKS (CHANGE THESE)
+/* =========================
+   EVENTS
+========================= */
 startCountdown(
     "standalone-timer",
     "standalone-btn",
-    standaloneTime,
-    "fivem://connect/YOUR_STANDALONE_IP"
+    new Date("2026-05-08T16:45:00-06:00").getTime(),
+    "fivem://connect/STANDALONE_IP"
 );
 
 startCountdown(
     "qbcore-timer",
     "qbcore-btn",
-    qbcoreTime,
-    "fivem://connect/YOUR_QBCORE_IP"
+    new Date("2026-05-09T16:45:00-06:00").getTime(),
+    "fivem://connect/QBCORE_IP"
 );
+
 </script>
 
 </body>
