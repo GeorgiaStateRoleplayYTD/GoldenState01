@@ -3,45 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CAD/MDT - Golden State Roleplay</title>
+    <title>Golden State Roleplay | FiveM & Roblox</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
     <link rel="icon" href="https://i.imgur.com/vB2Gt8p.png" type="image/png">
     <style>
         body {
             background: url('https://i.imgur.com/JHY3Pri.png') center/cover no-repeat fixed;
-            font-family: system-ui, -apple-system, sans-serif;
         }
-        /* Darker overlay */
         body::before {
             content: '';
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.85);
+            background: rgba(0, 0, 0, 0.88);
             z-index: -1;
         }
         .neon-green {
             color: #a3e635;
-            text-shadow: 0 0 15px #a3e635;
+            text-shadow: 0 0 20px #a3e635;
         }
-        .crt {
-            position: relative;
-        }
+        .crt { position: relative; }
         .crt::after {
             content: '';
             position: absolute;
             inset: 0;
-            background: repeating-linear-gradient(
-                transparent 0px,
-                transparent 2px,
-                rgba(163, 230, 53, 0.1) 2px,
-                rgba(163, 230, 53, 0.1) 4px
-            );
+            background: repeating-linear-gradient(transparent 0px, transparent 2px, rgba(163, 230, 53, 0.08) 2px, rgba(163, 230, 53, 0.08) 4px);
             pointer-events: none;
             z-index: 10;
-        }
-        .logo {
-            filter: drop-shadow(0 0 8px #a3e635);
         }
     </style>
 </head>
@@ -50,120 +38,142 @@
     <!-- LOADING SCREEN (48 seconds) -->
     <div id="loading-screen" class="fixed inset-0 bg-black flex flex-col items-center justify-center z-50">
         <div class="text-center">
-            <img src="https://i.imgur.com/vB2Gt8p.png" alt="GSRP Logo" class="h-28 mx-auto mb-8 logo">
-            
-            <h1 class="text-4xl font-black tracking-widest neon-green mb-6">GOLDEN STATE ROLEPLAY</h1>
-            
+            <img src="https://i.imgur.com/vB2Gt8p.png" alt="GSRP Logo" class="h-32 mx-auto mb-8">
+            <h1 class="text-5xl font-black tracking-widest neon-green mb-4">GOLDEN STATE ROLEPLAY</h1>
             <div class="flex items-center justify-center gap-3 text-[#a3e635] font-mono mb-8">
                 <div class="w-3 h-3 bg-[#a3e635] rounded-full animate-ping"></div>
-                <span class="tracking-widest">INITIALIZING CAD/MDT SYSTEM...</span>
+                <span>LOADING IMMERSIVE EXPERIENCE...</span>
             </div>
-
             <div class="w-96 h-1.5 bg-zinc-800 rounded-full overflow-hidden mx-auto">
                 <div id="progress" class="h-full bg-[#a3e635] w-0 transition-all duration-300"></div>
             </div>
-            <p class="text-xs text-gray-500 mt-3 font-mono">SECURE CONNECTION • PLEASE WAIT</p>
         </div>
     </div>
 
     <!-- MAIN CONTENT -->
     <div id="main-content" class="hidden">
 
-        <!-- Top Bar -->
-        <header class="bg-black/90 border-b border-[#a3e635]/30 backdrop-blur-md sticky top-0 z-50">
-            <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        <!-- Navbar -->
+        <nav class="bg-black/90 border-b border-[#a3e635]/30 backdrop-blur-md sticky top-0 z-50">
+            <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
                 <div class="flex items-center gap-4">
-                    <img src="https://i.imgur.com/vB2Gt8p.png" alt="Logo" class="h-10 logo">
+                    <img src="https://i.imgur.com/vB2Gt8p.png" alt="Logo" class="h-12">
                     <div>
-                        <h1 class="text-2xl font-black tracking-tighter">GOLDEN STATE ROLEPLAY</h1>
-                        <p class="text-[#a3e635] text-sm -mt-1">CAD / MDT SYSTEM</p>
+                        <h1 class="text-2xl font-black tracking-tighter">GOLDEN STATE</h1>
+                        <p class="text-[#a3e635] text-sm -mt-1">ROLEPLAY</p>
                     </div>
                 </div>
-                <div class="flex items-center gap-6 text-sm">
-                    <div class="text-emerald-400 font-mono">10-8 • AVAILABLE</div>
-                    <button onclick="alert('Logged in as Officer John Anderson')" 
-                            class="bg-[#a3e635] text-black px-5 py-2 rounded-lg font-bold hover:bg-[#bef575]">
-                        OFFICER ANDERSON
-                    </button>
+                <div class="hidden md:flex gap-8 text-sm font-medium">
+                    <a href="#" class="hover:text-[#a3e635]">Home</a>
+                    <a href="#" class="hover:text-[#a3e635]">FiveM Servers</a>
+                    <a href="#" class="hover:text-[#a3e635]">Roblox</a>
+                    <a href="#" class="hover:text-[#a3e635]">Community</a>
+                    <a href="#" class="hover:text-[#a3e635]">Discord</a>
                 </div>
+                <a href="#" onclick="alert('Join our Discord!')" 
+                   class="bg-[#a3e635] text-black px-6 py-3 rounded-xl font-bold hover:bg-[#bef575]">
+                    JOIN DISCORD
+                </a>
             </div>
-        </header>
+        </nav>
 
-        <main class="max-w-7xl mx-auto px-6 py-12">
-            <div class="text-center mb-12">
-                <h2 class="text-6xl font-black tracking-tighter neon-green">CAD / MDT</h2>
-                <p class="text-xl text-gray-300 mt-3">Golden State Roleplay • Law Enforcement System</p>
-            </div>
-
-            <div class="grid md:grid-cols-12 gap-6">
-                <div class="md:col-span-8 bg-black/80 border border-[#a3e635]/30 rounded-2xl p-8 crt">
-                    <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
-                        <i class="fas fa-tachometer-alt"></i> DASHBOARD
-                    </h3>
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-6">
-                        <div class="bg-zinc-900 p-6 rounded-xl">
-                            <p class="text-xs text-gray-400">ACTIVE UNITS</p>
-                            <p class="text-5xl font-bold neon-green mt-2">12</p>
-                        </div>
-                        <div class="bg-zinc-900 p-6 rounded-xl">
-                            <p class="text-xs text-gray-400">ACTIVE CALLS</p>
-                            <p class="text-5xl font-bold mt-2">8</p>
-                        </div>
-                        <div class="bg-zinc-900 p-6 rounded-xl">
-                            <p class="text-xs text-gray-400">STATUS</p>
-                            <p class="text-5xl font-bold text-emerald-400 mt-2">10-8</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="md:col-span-4 bg-black/80 border border-[#a3e635]/30 rounded-2xl p-8">
-                    <h3 class="font-bold mb-4">RECENT CALLS</h3>
-                    <div class="space-y-4 text-sm">
-                        <div class="flex gap-4">
-                            <span class="text-red-500 font-bold">10-13</span>
-                            <span>Shots Fired - Los Santos Freeway</span>
-                        </div>
-                        <div class="flex gap-4">
-                            <span class="text-amber-400 font-bold">10-31</span>
-                            <span>Traffic Stop - Vespucci Blvd</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="mt-16 text-center">
-                <button onclick="alert('Welcome to the Golden State Roleplay CAD/MDT System!')"
-                        class="bg-[#a3e635] hover:bg-[#bef575] text-black font-bold text-xl px-12 py-5 rounded-2xl transition-all">
-                    ENTER THE SYSTEM
+        <!-- Hero -->
+        <section class="py-32 text-center">
+            <h1 class="text-6xl md:text-7xl font-black tracking-tighter neon-green mb-6">
+                GOLDEN STATE ROLEPLAY
+            </h1>
+            <p class="text-2xl text-gray-300 max-w-3xl mx-auto">
+                The ultimate immersive roleplay experience across FiveM and Roblox
+            </p>
+            <div class="mt-10 flex flex-wrap justify-center gap-4">
+                <button onclick="document.getElementById('servers').scrollIntoView({behavior:'smooth'})"
+                        class="bg-[#a3e635] text-black px-10 py-4 rounded-2xl font-bold text-lg">
+                    JOIN OUR SERVERS
                 </button>
             </div>
-        </main>
+        </section>
 
-        <footer class="text-center py-8 text-xs text-gray-500 border-t border-[#a3e635]/20">
-            <p>GOLDEN STATE ROLEPLAY • CAD/MDT v2.0</p>
-            <p class="mt-1">Realism. Community. Experience.</p>
+        <!-- Servers Section -->
+        <section id="servers" class="max-w-7xl mx-auto px-6 py-20">
+            <h2 class="text-4xl font-bold text-center mb-16 neon-green">OUR SERVERS</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- FiveM Economy RP -->
+                <div class="bg-black/70 border border-[#a3e635]/30 rounded-3xl p-8 hover:border-[#a3e635] transition-all crt">
+                    <h3 class="text-2xl font-bold mb-4">FiveM Economy Roleplay</h3>
+                    <p class="text-gray-400 mb-6">The flagship server. Deep economy, player-driven businesses, custom scripts, and realistic law enforcement.</p>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between"><span>Server Type:</span><span class="text-emerald-400">Economy RP</span></div>
+                        <div class="flex justify-between"><span>Framework:</span><span>Custom</span></div>
+                        <div class="flex justify-between"><span>Players:</span><span class="text-emerald-400">High Population</span></div>
+                    </div>
+                    <button onclick="alert('Connecting to FiveM Economy Server... (IP copied)')" 
+                            class="mt-8 w-full bg-[#a3e635] text-black py-4 rounded-2xl font-bold">CONNECT TO SERVER</button>
+                </div>
+
+                <!-- FiveM Standalone -->
+                <div class="bg-black/70 border border-[#a3e635]/30 rounded-3xl p-8 hover:border-[#a3e635] transition-all crt">
+                    <h3 class="text-2xl font-bold mb-4">FiveM Standalone</h3>
+                    <p class="text-gray-400 mb-6">Serious roleplay focused server with minimal mods and maximum realism. Perfect for experienced roleplayers.</p>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between"><span>Server Type:</span><span class="text-emerald-400">Standalone RP</span></div>
+                        <div class="flex justify-between"><span>Style:</span><span>Serious RP</span></div>
+                    </div>
+                    <button onclick="alert('Connecting to FiveM Standalone Server...')" 
+                            class="mt-8 w-full bg-[#a3e635] text-black py-4 rounded-2xl font-bold">CONNECT TO SERVER</button>
+                </div>
+
+                <!-- Roblox Servers -->
+                <div class="bg-black/70 border border-[#a3e635]/30 rounded-3xl p-8 hover:border-[#a3e635] transition-all crt">
+                    <h3 class="text-2xl font-bold mb-4">Roblox Servers</h3>
+                    <p class="text-gray-400 mb-6">Multiple Roblox experiences including city life, police academy, and roleplay simulators.</p>
+                    <div class="space-y-3 text-sm">
+                        <div class="flex justify-between"><span>Platforms:</span><span class="text-emerald-400">Roblox</span></div>
+                        <div class="flex justify-between"><span>Experiences:</span><span>City RP, Police RP</span></div>
+                    </div>
+                    <button onclick="alert('Join our Roblox Group!')" 
+                            class="mt-8 w-full bg-[#a3e635] text-black py-4 rounded-2xl font-bold">PLAY ON ROBLOX</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About -->
+        <section class="bg-black/70 py-20">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h2 class="text-4xl font-bold neon-green mb-8">Welcome to Golden State Roleplay</h2>
+                <p class="text-lg text-gray-300 leading-relaxed">
+                    We are a premier roleplay community offering high-quality FiveM Economy and Standalone servers, 
+                    along with engaging Roblox experiences. Our goal is to provide the most immersive, realistic, 
+                    and fun roleplay environment possible.
+                </p>
+            </div>
+        </section>
+
+        <footer class="bg-black py-12 text-center text-gray-500 text-sm border-t border-[#a3e635]/20">
+            <p class="mb-2">© 2026 Golden State Roleplay • All Rights Reserved</p>
+            <p>FiveM Economy RP • FiveM Standalone • Roblox Roleplay</p>
         </footer>
     </div>
 
     <script>
-        // 48-second loading
+        // 48 Second Loading
         window.onload = () => {
             let progress = 0;
             const progressBar = document.getElementById('progress');
             const loadingScreen = document.getElementById('loading-screen');
             const mainContent = document.getElementById('main-content');
 
-            const totalTime = 48000; // 48 seconds
-            const interval = 100;    // update every 100ms
+            const totalTime = 48000;
+            const interval = 80;
             const steps = totalTime / interval;
-            let currentStep = 0;
+            let current = 0;
 
             const loader = setInterval(() => {
-                currentStep++;
-                progress = (currentStep / steps) * 100;
+                current++;
+                progress = Math.min((current / steps) * 100, 100);
                 progressBar.style.width = `${progress}%`;
 
-                if (currentStep >= steps) {
+                if (current >= steps) {
                     clearInterval(loader);
                     loadingScreen.style.opacity = '0';
                     setTimeout(() => {
