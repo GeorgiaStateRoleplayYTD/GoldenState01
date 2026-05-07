@@ -7,7 +7,7 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
 body {
-    background: url('https://i.imgur.com/EEPkqdI.png') center/cover no-repeat fixed;
+    background: url('https://rare-gallery.com/mocahbig/459795-Gilles-Ketting-night-dark-house-building-spooky.jpg') center/cover no-repeat fixed;
     overflow-x: hidden;
     color: #ddd;
 }
@@ -15,7 +15,7 @@ body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background: rgba(25, 0, 0, 0.88); /* Dark blood overlay */
+    background: rgba(15, 0, 0, 0.85); /* Strong dark blood/red overlay for scary mood */
     z-index: -10;
 }
 
@@ -32,12 +32,12 @@ body::before {
     inset: 0;
     background: url('https://i.imgur.com/oZhKQoT.png');
     background-size: cover;
-    opacity: 0.28;
+    opacity: 0.32;
     z-index: -6;
     pointer-events: none;
     animation: fogMove 60s linear infinite;
     mix-blend-mode: multiply;
-    filter: hue-rotate(340deg) saturate(2.8);
+    filter: hue-rotate(340deg) saturate(2.5);
 }
 @keyframes fogMove {
     0% { transform: translateX(0px) scale(1.1); }
@@ -50,14 +50,14 @@ body::before {
     inset: 0;
     background-image: linear-gradient(
         transparent 0%,
-        rgba(255, 40, 40, 0.18) 50%,
+        rgba(255, 40, 40, 0.20) 50%,
         transparent 100%
     );
     background-size: 2px 140px;
     animation: rainMove 0.45s linear infinite;
     z-index: -5;
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.45;
 }
 @keyframes rainMove {
     from { background-position: 0 0; }
@@ -72,7 +72,7 @@ body::before {
     height: 600px;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    background: conic-gradient(rgba(255, 23, 68, 0.22), transparent 70%);
+    background: conic-gradient(rgba(255, 23, 68, 0.25), transparent 70%);
     animation: radarSpin 8s linear infinite;
     z-index: -6;
     pointer-events: none;
@@ -80,18 +80,18 @@ body::before {
 
 .blob {
     position: fixed;
-    width: 280px;
-    height: 280px;
-    background: radial-gradient(circle, rgba(183, 28, 28, 0.75), transparent 70%);
-    filter: blur(55px);
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(183, 28, 28, 0.65), transparent 70%);
+    filter: blur(60px);
     border-radius: 50%;
     z-index: -4;
-    animation: floatBlob 22s infinite ease-in-out;
+    animation: floatBlob 25s infinite ease-in-out;
 }
 @keyframes floatBlob {
-    0% { transform: translate(0,0); opacity:0.25; }
-    50% { transform: translate(90px,-110px); opacity:0.45; }
-    100% { transform: translate(-70px,80px); opacity:0.25; }
+    0% { transform: translate(0,0); opacity:0.22; }
+    50% { transform: translate(100px,-120px); opacity:0.4; }
+    100% { transform: translate(-80px,90px); opacity:0.22; }
 }
 
 /* Music Control */
@@ -100,7 +100,7 @@ body::before {
     bottom: 20px;
     right: 20px;
     z-index: 50;
-    background: rgba(30, 0, 0, 0.9);
+    background: rgba(20, 0, 0, 0.9);
     padding: 10px 16px;
     border-radius: 9999px;
     display: flex;
@@ -118,10 +118,10 @@ body::before {
 <div class="radar"></div>
 
 <!-- BLOBS -->
-<div class="blob" style="top:15%; left:10%;"></div>
-<div class="blob" style="top:55%; left:75%;"></div>
-<div class="blob" style="top:25%; left:65%;"></div>
-<div class="blob" style="top:70%; left:15%;"></div>
+<div class="blob" style="top:12%; left:8%;"></div>
+<div class="blob" style="top:58%; left:72%;"></div>
+<div class="blob" style="top:28%; left:68%;"></div>
+<div class="blob" style="top:72%; left:18%;"></div>
 
 <!-- BACKGROUND MUSIC -->
 <audio id="bg-music" loop>
