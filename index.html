@@ -6,245 +6,230 @@
 <title>Golden State Roleplay - v2.0.1 Feature Event</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <style>
-body {
-    background: url('https://rare-gallery.com/mocahbig/459795-Gilles-Ketting-night-dark-house-building-spooky.jpg') center/cover no-repeat fixed;
-    overflow-x: hidden;
-    color: #ddd;
-}
-body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 0, 0, 0.85); /* Strong dark blood/red overlay for scary mood */
-    z-index: -10;
-}
+    body {
+        background: url('https://rare-gallery.com/mocahbig/459795-Gilles-Ketting-night-dark-house-building-spooky.jpg') center/cover no-repeat fixed;
+        overflow-x: hidden;
+        color: #ddd;
+        font-family: system-ui, -apple-system, sans-serif;
+    }
+    body::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(rgba(15, 0, 0, 0.75), rgba(8, 0, 0, 0.9));
+        z-index: -10;
+    }
 
-/* BLOOD NEON */
-.neon-red {
-    color: #ff1744;
-    text-shadow: 0 0 20px #ff1744,
-                 0 0 40px #b71c1c;
-}
+    /* Enhanced Blood Neon */
+    .neon-red {
+        color: #ff1e4a;
+        text-shadow: 0 0 15px #ff1e4a,
+                     0 0 35px #b71c1c,
+                     0 0 60px #7f0000;
+    }
 
-/* Effects */
-.fog {
-    position: fixed;
-    inset: 0;
-    background: url('https://i.imgur.com/oZhKQoT.png');
-    background-size: cover;
-    opacity: 0.32;
-    z-index: -6;
-    pointer-events: none;
-    animation: fogMove 60s linear infinite;
-    mix-blend-mode: multiply;
-    filter: hue-rotate(340deg) saturate(2.5);
-}
-@keyframes fogMove {
-    0% { transform: translateX(0px) scale(1.1); }
-    50% { transform: translateX(-80px) scale(1.2); }
-    100% { transform: translateX(0px) scale(1.1); }
-}
+    /* Fog & Atmosphere */
+    .fog {
+        position: fixed;
+        inset: 0;
+        background: url('https://i.imgur.com/oZhKQoT.png');
+        background-size: cover;
+        opacity: 0.35;
+        z-index: -6;
+        pointer-events: none;
+        animation: fogMove 70s linear infinite;
+        mix-blend-mode: multiply;
+        filter: hue-rotate(350deg) saturate(2.8) brightness(0.85);
+    }
+    @keyframes fogMove {
+        0% { transform: translateX(0) scale(1.05); }
+        50% { transform: translateX(-100px) scale(1.15); }
+        100% { transform: translateX(0) scale(1.05); }
+    }
 
-.rain {
-    position: fixed;
-    inset: 0;
-    background-image: linear-gradient(
-        transparent 0%,
-        rgba(255, 40, 40, 0.20) 50%,
-        transparent 100%
-    );
-    background-size: 2px 140px;
-    animation: rainMove 0.45s linear infinite;
-    z-index: -5;
-    pointer-events: none;
-    opacity: 0.45;
-}
-@keyframes rainMove {
-    from { background-position: 0 0; }
-    to { background-position: 0 140px; }
-}
+    .rain {
+        position: fixed;
+        inset: 0;
+        background: linear-gradient(transparent 0%, rgba(255, 50, 50, 0.18) 50%, transparent 100%);
+        background-size: 2.5px 160px;
+        animation: rainMove 0.4s linear infinite;
+        z-index: -5;
+        pointer-events: none;
+        opacity: 0.5;
+    }
+    @keyframes rainMove {
+        from { background-position: 0 0; }
+        to { background-position: 0 160px; }
+    }
 
-.radar {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    width: 600px;
-    height: 600px;
-    transform: translate(-50%, -50%);
-    border-radius: 50%;
-    background: conic-gradient(rgba(255, 23, 68, 0.25), transparent 70%);
-    animation: radarSpin 8s linear infinite;
-    z-index: -6;
-    pointer-events: none;
-}
+    /* Floating Blood Orbs */
+    .blob {
+        position: fixed;
+        width: 320px;
+        height: 320px;
+        background: radial-gradient(circle, rgba(220, 20, 60, 0.55), transparent 65%);
+        filter: blur(65px);
+        border-radius: 50%;
+        z-index: -4;
+        animation: floatBlob 28s infinite ease-in-out;
+    }
+    @keyframes floatBlob {
+        0%   { transform: translate(0, 0); opacity: 0.25; }
+        50%  { transform: translate(120px, -140px); opacity: 0.45; }
+        100% { transform: translate(-90px, 110px); opacity: 0.25; }
+    }
 
-.blob {
-    position: fixed;
-    width: 300px;
-    height: 300px;
-    background: radial-gradient(circle, rgba(183, 28, 28, 0.65), transparent 70%);
-    filter: blur(60px);
-    border-radius: 50%;
-    z-index: -4;
-    animation: floatBlob 25s infinite ease-in-out;
-}
-@keyframes floatBlob {
-    0% { transform: translate(0,0); opacity:0.22; }
-    50% { transform: translate(100px,-120px); opacity:0.4; }
-    100% { transform: translate(-80px,90px); opacity:0.22; }
-}
-
-/* Music Control */
-#music-control {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 50;
-    background: rgba(20, 0, 0, 0.9);
-    padding: 10px 16px;
-    border-radius: 9999px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    border: 1px solid #ff1744;
-}
+    /* Cards */
+    .event-card {
+        background: rgba(20, 0, 0, 0.75);
+        backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 30, 60, 0.3);
+        transition: all 0.4s ease;
+    }
+    .event-card:hover {
+        transform: translateY(-8px);
+        border-color: #ff1e4a;
+        box-shadow: 0 0 40px rgba(255, 30, 60, 0.4);
+    }
 </style>
 </head>
-<body class="text-white min-h-screen">
+<body class="min-h-screen">
 
 <!-- EFFECTS -->
 <div class="fog"></div>
 <div class="rain"></div>
-<div class="radar"></div>
 
 <!-- BLOBS -->
-<div class="blob" style="top:12%; left:8%;"></div>
-<div class="blob" style="top:58%; left:72%;"></div>
-<div class="blob" style="top:28%; left:68%;"></div>
-<div class="blob" style="top:72%; left:18%;"></div>
+<div class="blob" style="top:10%; left:5%;"></div>
+<div class="blob" style="top:50%; left:70%; animation-delay: -10s;"></div>
+<div class="blob" style="top:25%; left:75%; animation-delay: -18s;"></div>
+<div class="blob" style="top:65%; left:12%; animation-delay: -7s;"></div>
 
-<!-- BACKGROUND MUSIC -->
-<audio id="bg-music" loop>
-    <source src="https://www.youtube.com/watch?v=Yhu7sck0gAA" type="audio/mp3">
-</audio>
+<!-- MUSIC -->
+<audio id="bg-music" loop></audio>
 
-<!-- MUSIC CONTROL -->
-<div id="music-control" class="text-sm">
-    <button onclick="toggleMusic()" class="flex items-center gap-2 text-[#ff1744] hover:text-red-300 transition">
+<div id="music-control" class="fixed bottom-6 right-6 z-50 bg-black/80 border border-red-700 rounded-full px-5 py-3 flex items-center gap-3 text-sm backdrop-blur-md">
+    <button onclick="toggleMusic()" class="flex items-center gap-2 text-[#ff1e4a] hover:text-white transition">
         <span id="music-icon">♪</span>
-        <span id="music-text">Play Ambient Music</span>
+        <span id="music-text">Play Horror Ambient</span>
     </button>
 </div>
 
-<!-- LOADING SCREEN -->
+<!-- LOADING -->
 <div id="loading-screen" class="fixed inset-0 bg-black flex flex-col items-center justify-center z-50">
-    <h1 class="text-5xl neon-red font-black mb-4 tracking-widest">GOLDEN STATE ROLEPLAY</h1>
-    <p class="text-[#ff1744] mb-8 text-xl">v2.0.1 FEATURE EVENT</p>
-    <div class="w-96 h-2 bg-zinc-900 rounded-full overflow-hidden border border-red-900">
-        <div id="progress" class="h-full bg-[#ff1744] w-0"></div>
+    <h1 class="text-6xl neon-red font-black tracking-[4px] mb-3">GOLDEN STATE</h1>
+    <p class="text-red-500 text-2xl mb-10 tracking-widest">ROLEPLAY • v2.0.1 FEATURE EVENT</p>
+    
+    <div class="w-[420px] h-1.5 bg-zinc-900 rounded-full overflow-hidden mb-4 border border-red-900">
+        <div id="progress" class="h-full bg-gradient-to-r from-red-600 to-red-400 w-0 transition-all"></div>
     </div>
-    <p class="text-red-400 mt-4 text-sm">INITIALIZING NIGHTMARE...</p>
+    <p class="text-red-400 text-sm tracking-widest">ENTERING THE NIGHTMARE...</p>
 </div>
 
-<!-- MAIN CONTENT -->
-<div id="main-content" class="hidden text-center py-20">
-    <h1 class="text-6xl neon-red font-black tracking-wider">LIVE EVENTS</h1>
-    
-    <div class="mt-6 text-red-400 text-xl font-mono" id="current-time">
-        Loading date &amp; time...
+<!-- MAIN -->
+<div id="main-content" class="hidden text-center py-16 px-6">
+    <h1 class="text-7xl neon-red font-black tracking-widest mb-2">LIVE EVENTS</h1>
+    <div class="text-red-400 font-mono text-lg mb-12" id="current-time">Loading time...</div>
+
+    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+        <!-- Standalone -->
+        <div class="event-card p-10 rounded-3xl">
+            <h2 class="text-3xl font-bold mb-4 text-red-300">Standalone</h2>
+            <div id="standalone-timer" class="text-4xl neon-red font-mono mb-8">00D 00H 00M 00S</div>
+            <button id="standalone-btn" disabled 
+                    class="w-full py-5 rounded-2xl font-bold text-lg border-2 border-red-900 hover:border-red-500 transition-all">
+                EVENT LOCKED
+            </button>
+        </div>
+
+        <!-- QBcore -->
+        <div class="event-card p-10 rounded-3xl">
+            <h2 class="text-3xl font-bold mb-4 text-red-300">QBcore</h2>
+            <div id="qbcore-timer" class="text-4xl neon-red font-mono mb-8">00D 00H 00M 00S</div>
+            <button id="qbcore-btn" disabled 
+                    class="w-full py-5 rounded-2xl font-bold text-lg border-2 border-red-900 hover:border-red-500 transition-all">
+                EVENT LOCKED
+            </button>
+        </div>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-10 max-w-6xl mx-auto mt-12">
-        <div class="bg-zinc-950 border border-red-900/50 p-8 rounded-3xl">
-            <h2 class="text-2xl font-bold mb-3 text-red-300">Standalone</h2>
-            <div id="standalone-timer" class="text-3xl neon-red mb-6">Loading...</div>
-            <button id="standalone-btn" disabled class="w-full bg-zinc-900 py-4 rounded-xl font-bold opacity-50 border border-red-900">EVENT LOCKED</button>
-        </div>
-        
-        <div class="bg-zinc-950 border border-red-900/50 p-8 rounded-3xl">
-            <h2 class="text-2xl font-bold mb-3 text-red-300">QBcore</h2>
-            <div id="qbcore-timer" class="text-3xl neon-red mb-6">Loading...</div>
-            <button id="qbcore-btn" disabled class="w-full bg-zinc-900 py-4 rounded-xl font-bold opacity-50 border border-red-900">EVENT LOCKED</button>
-        </div>
-    </div>
-
-    <div class="mt-16 text-red-400/70 text-sm max-w-2xl mx-auto px-6">
+    <div class="mt-16 text-red-400/70 max-w-xl mx-auto text-sm leading-relaxed">
         You guys are very welcome to stream and help the community out promoting it ❤️
     </div>
 </div>
 
 <script>
-// Live Date & Time
+// Live Clock
 function updateDateTime() {
-    const now = new Date();
-    const options = { 
-        weekday: 'long', year: 'numeric', month: 'long', day: 'numeric',
-        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true 
-    };
-    document.getElementById("current-time").textContent = now.toLocaleString('en-US', options);
+    const el = document.getElementById("current-time");
+    el.textContent = new Date().toLocaleString('en-US', {
+        weekday: 'long', month: 'long', day: 'numeric', year: 'numeric',
+        hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true
+    });
 }
 setInterval(updateDateTime, 1000);
 updateDateTime();
 
-// LOADING
+// Loading
 window.onload = () => {
     let p = 0;
     const bar = document.getElementById("progress");
-    const load = setInterval(() => {
-        p++;
+    const interval = setInterval(() => {
+        p += 2;
         bar.style.width = p + "%";
         if(p >= 100){
-            clearInterval(load);
+            clearInterval(interval);
             document.getElementById("loading-screen").style.display = "none";
             document.getElementById("main-content").classList.remove("hidden");
-            
-            setTimeout(() => {
-                document.getElementById("bg-music").play().catch(() => {});
-            }, 800);
         }
-    }, 55);
+    }, 45);
 };
 
-// MUSIC CONTROL
-let isPlaying = true;
+// Music (YouTube link won't work directly - replace with real MP3 when possible)
 const audio = document.getElementById("bg-music");
+let isPlaying = false;
 
 function toggleMusic() {
+    if (!audio.src || audio.src === window.location.href) {
+        alert("Please host the music file and update the <source> in the code.");
+        return;
+    }
     if (isPlaying) {
         audio.pause();
-        document.getElementById("music-text").textContent = "Music Paused";
+        document.getElementById("music-text").textContent = "Paused";
     } else {
         audio.play();
-        document.getElementById("music-text").textContent = "Playing Ambient";
+        document.getElementById("music-text").textContent = "Playing Horror Ambient";
     }
     isPlaying = !isPlaying;
 }
 
-// COUNTDOWN
-function startCountdown(timerId, btnId, target, link){
-    const timer = document.getElementById(timerId);
+// Countdowns
+function startCountdown(timerId, btnId, targetTime, link) {
+    const timerEl = document.getElementById(timerId);
     const btn = document.getElementById(btnId);
-    
-    function update(){
-        const diff = target - Date.now();
-        if(diff <= 0){
-            timer.innerHTML = "🚨 EVENT LIVE 🚨";
+
+    const update = () => {
+        const diff = targetTime - Date.now();
+        if (diff <= 0) {
+            timerEl.innerHTML = "🚨 EVENT IS LIVE 🚨";
             btn.disabled = false;
-            btn.className = "w-full bg-[#ff1744] text-black py-4 rounded-xl font-bold border border-red-700";
+            btn.className = "w-full py-5 rounded-2xl font-bold text-lg bg-red-600 hover:bg-red-500 text-black transition-all";
             btn.innerHTML = "CONNECT NOW";
             btn.onclick = () => window.location.href = link;
             return;
         }
-        const d = Math.floor(diff/86400000);
-        const h = Math.floor((diff/3600000)%24);
-        const m = Math.floor((diff/60000)%60);
-        const s = Math.floor((diff/1000)%60);
-        timer.innerHTML = `${d}D ${h}H ${m}M ${s}S`;
-    }
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff / 3600000) % 24);
+        const m = Math.floor((diff / 60000) % 60);
+        const s = Math.floor((diff / 1000) % 60);
+        timerEl.innerHTML = `${d}D ${h}H ${m}M ${s}S`;
+    };
     update();
     setInterval(update, 1000);
 }
 
+// Event Times
 startCountdown("standalone-timer", "standalone-btn", new Date("2026-05-08T16:45:00-06:00").getTime(), "fivem://connect/STANDALONE_IP");
 startCountdown("qbcore-timer", "qbcore-btn", new Date("2026-05-09T16:45:00-06:00").getTime(), "fivem://connect/QBCORE_IP");
 </script>
