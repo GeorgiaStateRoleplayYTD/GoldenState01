@@ -25,17 +25,15 @@
         text-shadow: 0 0 15px #ff1e4a, 0 0 35px #b71c1c, 0 0 60px #7f0000;
     }
 
-    .fog { /* same as previous */ }
-    .rain { /* same as previous */ }
-    .blob { /* same as previous */ }
+    .fog, .rain, .blob { /* Keep previous styles - unchanged */ }
 
-    .event-card, .rules-card {
+    .event-card, .rules-card, .specs-card {
         background: rgba(20, 0, 0, 0.75);
         backdrop-filter: blur(12px);
         border: 1px solid rgba(255, 30, 60, 0.3);
         transition: all 0.4s ease;
     }
-    .event-card:hover, .rules-card:hover {
+    .event-card:hover, .rules-card:hover, .specs-card:hover {
         transform: translateY(-8px);
         border-color: #ff1e4a;
         box-shadow: 0 0 40px rgba(255, 30, 60, 0.4);
@@ -98,36 +96,44 @@
         <h2 class="text-4xl neon-red font-black text-center mb-8">EVENT RULES</h2>
         <div class="grid md:grid-cols-2 gap-6 text-red-200">
             <ul class="space-y-4">
-                <li class="flex items-start gap-3"><span class="text-red-500 mt-1">⚠️</span> <span><strong>NO SHOOTING</strong> or Killing</span></li>
-                <li class="flex items-start gap-3"><span class="text-red-500 mt-1">⚠️</span> <span><strong>NO WEAPONS</strong> of any kind</span></li>
-                <li class="flex items-start gap-3"><span class="text-red-500 mt-1">⚠️</span> <span><strong>NO JOBS</strong> or Work activities</span></li>
-                <li class="flex items-start gap-3"><span class="text-red-500 mt-1">⚠️</span> <span><strong>NO ROBBERIES</strong> or Crimes</span></li>
+                <li class="flex items-start gap-3"><span class="text-red-500 mt-1">⚠️</span> <span><strong>NO SHOOTING / KILLING</strong></span></li>
+                <li class="flex items-start gap-3"><span class="text-red-500 mt-1">⚠️</span> <span><strong>NO WEAPONS</strong></span></li>
+                <li class="flex items-start gap-3"><span class="text-red-500 mt-1">⚠️</span> <span><strong>NO JOBS</strong></span></li>
+                <li class="flex items-start gap-3"><span class="text-red-500 mt-1">⚠️</span> <span><strong>NO ROBBERIES / CRIMES</strong></span></li>
             </ul>
             <ul class="space-y-4">
-                <li class="flex items-start gap-3"><span class="text-red-500 mt-1">⚠️</span> <span><strong>NO PVP</strong> - Roleplay Only</span></li>
+                <li class="flex items-start gap-3"><span class="text-red-500 mt-1">⚠️</span> <span><strong>NO PVP</strong> — Roleplay Only</span></li>
                 <li class="flex items-start gap-3"><span class="text-red-500 mt-1">⚠️</span> <span>Respect all players</span></li>
-                <li class="flex items-start gap-3"><span class="text-red-500 mt-1">⚠️</span> <span>Stay in character at all times</span></li>
-                <li class="flex items-start gap-3"><span class="text-red-500 mt-1">⚠️</span> <span>Have fun and be creative!</span></li>
+                <li class="flex items-start gap-3"><span class="text-red-500 mt-1">⚠️</span> <span>Stay in character</span></li>
+                <li class="flex items-start gap-3"><span class="text-red-500 mt-1">⚠️</span> <span>Have fun & be creative!</span></li>
             </ul>
         </div>
-        <p class="text-center text-red-400 mt-8 text-sm">Breaking any rules will result in immediate removal from the event.</p>
+        <p class="text-center text-red-400 mt-8 text-sm">Breaking any rules = Immediate removal</p>
     </div>
 
-    <!-- Event Information -->
-    <div class="max-w-4xl mx-auto mb-16">
-        <h2 class="text-4xl neon-red font-black mb-6">EVENT INFORMATION</h2>
-        <div class="grid md:grid-cols-3 gap-6 text-left">
-            <div class="bg-zinc-950/70 border border-red-900/50 p-6 rounded-2xl">
-                <h3 class="text-red-300 font-bold mb-2">🕒 Duration</h3>
-                <p class="text-red-400">2 Hours of pure roleplay</p>
+    <!-- Server Specs -->
+    <div class="specs-card p-10 rounded-3xl mb-16 max-w-4xl mx-auto text-left">
+        <h2 class="text-4xl neon-red font-black text-center mb-8">SERVER SPECIFICATIONS</h2>
+        <div class="grid md:grid-cols-2 gap-x-12 gap-y-6 text-red-200">
+            <div>
+                <h3 class="font-bold text-red-300 mb-4">🖥 MAIN GTA V SPECS</h3>
+                <ul class="space-y-3">
+                    <li><strong>Game Version:</strong> Latest GTA V (Retail / Steam)</li>
+                    <li><strong>Framework:</strong> QB-Core &amp; Standalone</li>
+                    <li><strong>Players:</strong> 64 - 128 Slots</li>
+                    <li><strong>Sync:</strong> OneSync Infinity</li>
+                    <li><strong>Anti-Cheat:</strong> BattlEye + Custom</li>
+                </ul>
             </div>
-            <div class="bg-zinc-950/70 border border-red-900/50 p-6 rounded-2xl">
-                <h3 class="text-red-300 font-bold mb-2">👥 Players</h3>
-                <p class="text-red-400">All welcome - New &amp; Veteran</p>
-            </div>
-            <div class="bg-zinc-950/70 border border-red-900/50 p-6 rounded-2xl">
-                <h3 class="text-red-300 font-bold mb-2">🎭 Theme</h3>
-                <p class="text-red-400">Dark Horror Roleplay Night</p>
+            <div>
+                <h3 class="font-bold text-red-300 mb-4">💻 RECOMMENDED PC SPECS</h3>
+                <ul class="space-y-3">
+                    <li><strong>CPU:</strong> Intel i5-10400 / Ryzen 5 3600 or better</li>
+                    <li><strong>RAM:</strong> 16GB (32GB Recommended)</li>
+                    <li><strong>GPU:</strong> GTX 1660 / RTX 3060 or better</li>
+                    <li><strong>Storage:</strong> SSD Required</li>
+                    <li><strong>Internet:</strong> Stable 20 Mbps+</li>
+                </ul>
             </div>
         </div>
     </div>
@@ -140,7 +146,7 @@
 </div>
 
 <script>
-// Live Clock, Loading, Music, and Countdowns (same as previous version)
+// (Previous scripts remain the same - Live Clock, Loading, Music, Countdowns)
 function updateDateTime() {
     const el = document.getElementById("current-time");
     el.textContent = new Date().toLocaleString('en-US', {
@@ -171,7 +177,6 @@ function toggleMusic() {
     alert("Please host your horror ambient MP3 file and update the audio source.");
 }
 
-// Countdown Function
 function startCountdown(timerId, btnId, targetTime, link) {
     const timerEl = document.getElementById(timerId);
     const btn = document.getElementById(btnId);
